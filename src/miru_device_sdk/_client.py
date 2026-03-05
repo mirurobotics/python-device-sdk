@@ -79,7 +79,7 @@ class Miru(SyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("MIRU_BASE_URL")
         if base_url is None:
-            base_url = f"http://localhost/beta"
+            base_url = f"http://localhost/v0.2"
 
         super().__init__(
             version=__version__,
@@ -267,7 +267,7 @@ class AsyncMiru(AsyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("MIRU_BASE_URL")
         if base_url is None:
-            base_url = f"http://localhost/beta"
+            base_url = f"http://localhost/v0.2"
 
         super().__init__(
             version=__version__,
