@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
-from miru_device import MiruDevice, AsyncMiruDevice
 from tests.utils import assert_matches_type
-from miru_device.types import GitCommitRetrieveResponse
+from miru_device_sdk import Miru, AsyncMiru
+from miru_device_sdk.types import GitCommit
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,15 +19,15 @@ class TestGitCommits:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve(self, client: MiruDevice) -> None:
+    def test_method_retrieve(self, client: Miru) -> None:
         git_commit = client.git_commits.retrieve(
             "git_commit_123",
         )
-        assert_matches_type(GitCommitRetrieveResponse, git_commit, path=["response"])
+        assert_matches_type(GitCommit, git_commit, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_retrieve(self, client: MiruDevice) -> None:
+    def test_raw_response_retrieve(self, client: Miru) -> None:
         response = client.git_commits.with_raw_response.retrieve(
             "git_commit_123",
         )
@@ -35,11 +35,11 @@ class TestGitCommits:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         git_commit = response.parse()
-        assert_matches_type(GitCommitRetrieveResponse, git_commit, path=["response"])
+        assert_matches_type(GitCommit, git_commit, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve(self, client: MiruDevice) -> None:
+    def test_streaming_response_retrieve(self, client: Miru) -> None:
         with client.git_commits.with_streaming_response.retrieve(
             "git_commit_123",
         ) as response:
@@ -47,13 +47,13 @@ class TestGitCommits:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             git_commit = response.parse()
-            assert_matches_type(GitCommitRetrieveResponse, git_commit, path=["response"])
+            assert_matches_type(GitCommit, git_commit, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_retrieve(self, client: MiruDevice) -> None:
+    def test_path_params_retrieve(self, client: Miru) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `git_commit_id` but received ''"):
             client.git_commits.with_raw_response.retrieve(
                 "",
@@ -67,15 +67,15 @@ class TestAsyncGitCommits:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncMiruDevice) -> None:
+    async def test_method_retrieve(self, async_client: AsyncMiru) -> None:
         git_commit = await async_client.git_commits.retrieve(
             "git_commit_123",
         )
-        assert_matches_type(GitCommitRetrieveResponse, git_commit, path=["response"])
+        assert_matches_type(GitCommit, git_commit, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncMiruDevice) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncMiru) -> None:
         response = await async_client.git_commits.with_raw_response.retrieve(
             "git_commit_123",
         )
@@ -83,11 +83,11 @@ class TestAsyncGitCommits:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         git_commit = await response.parse()
-        assert_matches_type(GitCommitRetrieveResponse, git_commit, path=["response"])
+        assert_matches_type(GitCommit, git_commit, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncMiruDevice) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncMiru) -> None:
         async with async_client.git_commits.with_streaming_response.retrieve(
             "git_commit_123",
         ) as response:
@@ -95,13 +95,13 @@ class TestAsyncGitCommits:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             git_commit = await response.parse()
-            assert_matches_type(GitCommitRetrieveResponse, git_commit, path=["response"])
+            assert_matches_type(GitCommit, git_commit, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncMiruDevice) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncMiru) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `git_commit_id` but received ''"):
             await async_client.git_commits.with_raw_response.retrieve(
                 "",

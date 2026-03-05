@@ -1,11 +1,11 @@
 [project]
-name = "miru_device"
+name = "miru_device_sdk"
 version = "0.0.1"
-description = "The official Python library for the miru-device API"
+description = "The official Python library for the miru API"
 dynamic = ["readme"]
 license = "MIT"
 authors = [
-{ name = "Miru Device", email = "" },
+{ name = "Miru", email = "ben@mirurobotics.com" },
 ]
 
 dependencies = [
@@ -37,25 +37,16 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/stainless-sdks/miru-device-python"
-Repository = "https://github.com/stainless-sdks/miru-device-python"
+Homepage = "https://github.com/mirurobotics/python-device-sdk"
+Repository = "https://github.com/mirurobotics/python-device-sdk"
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
 
-[tool.uv]
+[tool.rye]
 managed = true
-required-version = ">=0.9"
-conflicts = [
-    [
-      { group = "pydantic-v1" },
-      { group = "pydantic-v2" },
-    ],
-]
-
-[dependency-groups]
-# version pins are in uv.lock
-dev = [
+# version pins are in requirements-dev.lock
+dev-dependencies = [
     "pyright==1.1.399",
     "mypy==1.17",
     "respx",
@@ -63,18 +54,41 @@ dev = [
     "pytest-asyncio",
     "ruff",
     "time-machine",
+    "nox",
     "dirty-equals>=0.6.0",
     "importlib-metadata>=6.7.0",
     "rich>=13.7.1",
     "pytest-xdist>=3.6.1",
 ]
-pydantic-v1 = [
-    "pydantic>=1.9.0,<2",
-]
-pydantic-v2 = [
-    "pydantic~=2.0 ; python_full_version < '3.14'",
-    "pydantic~=2.12 ; python_full_version >= '3.14'",
-]
+
+[tool.rye.scripts]
+format = { chain = [
+  "format:ruff",
+  "format:docs",
+  "fix:ruff",
+  # run formatting again to fix any inconsistencies when imports are stripped
+  "format:ruff",
+]}
+"format:docs" = "bash -c 'python scripts/utils/ruffen-docs.py README.md $(find . -type f -name api.md)'"
+"format:ruff" = "ruff format"
+
+"lint" = { chain = [
+  "check:ruff",
+  "typecheck",
+  "check:importable",
+]}
+"check:ruff" = "ruff check ."
+"fix:ruff" = "ruff check --fix ."
+
+"check:importable" = "python -c 'import miru_device_sdk'"
+
+typecheck = { chain = [
+  "typecheck:pyright",
+  "typecheck:mypy"
+]}
+"typecheck:pyright" = "pyright"
+"typecheck:verify-types" = "pyright --verifytypes miru_device_sdk --ignoreexternal"
+"typecheck:mypy" = "mypy ."
 
 [build-system]
 requires = ["hatchling==1.26.3", "hatch-fancy-pypi-readme"]
@@ -86,7 +100,7 @@ include = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/miru_device"]
+packages = ["src/miru_device_sdk"]
 
 [tool.hatch.build.targets.sdist]
 # Basically everything except hidden files/directories (such as .github, .devcontainers, .python-version, etc)
@@ -112,7 +126,7 @@ path = "README.md"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # replace relative links with absolute links
 pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/stainless-sdks/miru-device-python/tree/main/\g<2>)'
+replacement = '[\1](https://github.com/mirurobotics/python-device-sdk/tree/main/\g<2>)'
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -154,7 +168,7 @@ show_error_codes = true
 #
 # We also exclude our `tests` as mypy doesn't always infer
 # types correctly and Pyright will still catch any type errors.
-exclude = ['src/miru_device/_files.py', '_dev/.*.py', 'tests/.*']
+exclude = ['src/miru_device_sdk/_files.py', '_dev/.*.py', 'tests/.*']
 
 strict_equality = true
 implicit_reexport = true
@@ -246,7 +260,7 @@ length-sort = true
 length-sort-straight = true
 combine-as-imports = true
 extra-standard-library = ["typing_extensions"]
-known-first-party = ["miru_device", "tests"]
+known-first-party = ["miru_device_sdk", "tests"]
 
 [tool.ruff.lint.per-file-ignores]
 "bin/**.py" = ["T201", "T203"]
