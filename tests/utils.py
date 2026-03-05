@@ -8,8 +8,8 @@ from typing import Any, TypeVar, Iterator, Sequence, cast
 from datetime import date, datetime
 from typing_extensions import Literal, get_args, get_origin, assert_type
 
-from miru_device._types import Omit, NoneType
-from miru_device._utils import (
+from miru_device_sdk._types import Omit, NoneType
+from miru_device_sdk._utils import (
     is_dict,
     is_list,
     is_list_type,
@@ -19,8 +19,8 @@ from miru_device._utils import (
     is_annotated_type,
     is_type_alias_type,
 )
-from miru_device._compat import PYDANTIC_V1, field_outer_type, get_model_fields
-from miru_device._models import BaseModel
+from miru_device_sdk._compat import PYDANTIC_V1, field_outer_type, get_model_fields
+from miru_device_sdk._models import BaseModel
 
 BaseModelT = TypeVar("BaseModelT", bound=BaseModel)
 

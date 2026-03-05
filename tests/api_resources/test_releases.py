@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
-from miru_device import MiruDevice, AsyncMiruDevice
 from tests.utils import assert_matches_type
-from miru_device.types import Release
+from miru_device_sdk import Miru, AsyncMiru
+from miru_device_sdk.types import Release
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +19,7 @@ class TestReleases:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve(self, client: MiruDevice) -> None:
+    def test_method_retrieve(self, client: Miru) -> None:
         release = client.releases.retrieve(
             "rls_123",
         )
@@ -27,7 +27,7 @@ class TestReleases:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_retrieve(self, client: MiruDevice) -> None:
+    def test_raw_response_retrieve(self, client: Miru) -> None:
         response = client.releases.with_raw_response.retrieve(
             "rls_123",
         )
@@ -39,7 +39,7 @@ class TestReleases:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve(self, client: MiruDevice) -> None:
+    def test_streaming_response_retrieve(self, client: Miru) -> None:
         with client.releases.with_streaming_response.retrieve(
             "rls_123",
         ) as response:
@@ -53,7 +53,7 @@ class TestReleases:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_retrieve(self, client: MiruDevice) -> None:
+    def test_path_params_retrieve(self, client: Miru) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `release_id` but received ''"):
             client.releases.with_raw_response.retrieve(
                 "",
@@ -61,14 +61,14 @@ class TestReleases:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve_current(self, client: MiruDevice) -> None:
-        release = client.releases.retrieve_current()
+    def test_method_current(self, client: Miru) -> None:
+        release = client.releases.current()
         assert_matches_type(Release, release, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_current(self, client: MiruDevice) -> None:
-        response = client.releases.with_raw_response.retrieve_current()
+    def test_raw_response_current(self, client: Miru) -> None:
+        response = client.releases.with_raw_response.current()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -77,8 +77,8 @@ class TestReleases:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_current(self, client: MiruDevice) -> None:
-        with client.releases.with_streaming_response.retrieve_current() as response:
+    def test_streaming_response_current(self, client: Miru) -> None:
+        with client.releases.with_streaming_response.current() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -95,7 +95,7 @@ class TestAsyncReleases:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncMiruDevice) -> None:
+    async def test_method_retrieve(self, async_client: AsyncMiru) -> None:
         release = await async_client.releases.retrieve(
             "rls_123",
         )
@@ -103,7 +103,7 @@ class TestAsyncReleases:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncMiruDevice) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncMiru) -> None:
         response = await async_client.releases.with_raw_response.retrieve(
             "rls_123",
         )
@@ -115,7 +115,7 @@ class TestAsyncReleases:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncMiruDevice) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncMiru) -> None:
         async with async_client.releases.with_streaming_response.retrieve(
             "rls_123",
         ) as response:
@@ -129,7 +129,7 @@ class TestAsyncReleases:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncMiruDevice) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncMiru) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `release_id` but received ''"):
             await async_client.releases.with_raw_response.retrieve(
                 "",
@@ -137,14 +137,14 @@ class TestAsyncReleases:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve_current(self, async_client: AsyncMiruDevice) -> None:
-        release = await async_client.releases.retrieve_current()
+    async def test_method_current(self, async_client: AsyncMiru) -> None:
+        release = await async_client.releases.current()
         assert_matches_type(Release, release, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_current(self, async_client: AsyncMiruDevice) -> None:
-        response = await async_client.releases.with_raw_response.retrieve_current()
+    async def test_raw_response_current(self, async_client: AsyncMiru) -> None:
+        response = await async_client.releases.with_raw_response.current()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -153,8 +153,8 @@ class TestAsyncReleases:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_current(self, async_client: AsyncMiruDevice) -> None:
-        async with async_client.releases.with_streaming_response.retrieve_current() as response:
+    async def test_streaming_response_current(self, async_client: AsyncMiru) -> None:
+        async with async_client.releases.with_streaming_response.current() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
