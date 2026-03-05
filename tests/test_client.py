@@ -653,6 +653,67 @@ class TestMiru:
             client = Miru(_strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
+    def test_socket_path_default_from_env(self) -> None:
+        socket_path = "/tmp/miru-agent-default.sock"
+
+        with update_env(MIRU_AGENT_SOCKET=socket_path):
+            client = Miru(_strict_response_validation=True)
+
+        transport = client._client._transport
+        assert isinstance(transport, httpx.HTTPTransport)
+        assert transport._pool._uds == socket_path
+
+        client.close()
+
+    def test_socket_path_override_argument(self) -> None:
+        socket_path = "/tmp/miru-agent-override.sock"
+        env_socket_path = "/tmp/miru-agent-env.sock"
+
+        with update_env(MIRU_AGENT_SOCKET=env_socket_path):
+            client = Miru(socket_path=socket_path, _strict_response_validation=True)
+
+        transport = client._client._transport
+        assert isinstance(transport, httpx.HTTPTransport)
+        assert transport._pool._uds == socket_path
+
+        client.close()
+
+    def test_socket_transport_constructor_uses_env_socket_path(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        socket_path = "/tmp/miru-agent-constructor.sock"
+        captured: dict[str, Any] = {"uds": None}
+
+        class TrackingHTTPTransport(httpx.HTTPTransport):
+            def __init__(self, *args: Any, **kwargs: Any) -> None:
+                captured["uds"] = kwargs.get("uds", None)
+                super().__init__(*args, **kwargs)
+
+        monkeypatch.setattr(httpx, "HTTPTransport", TrackingHTTPTransport)
+
+        with update_env(MIRU_AGENT_SOCKET=socket_path):
+            client = Miru(_strict_response_validation=True)
+
+        assert captured["uds"] == socket_path
+        client.close()
+
+    def test_socket_path_not_applied_when_client_supplied(self) -> None:
+        custom_transport = httpx.HTTPTransport()
+        custom_http_client = httpx.Client(
+            transport=custom_transport,
+            base_url="http://localhost/v0.2",
+            follow_redirects=True,
+            limits=httpx.Limits(max_connections=100, max_keepalive_connections=20),
+        )
+        with update_env(MIRU_AGENT_SOCKET="/tmp/miru-agent-env-overridden.sock"):
+            client = Miru(http_client=custom_http_client, _strict_response_validation=True)
+
+        http_client = cast(Any, client._client)
+        assert http_client._transport is custom_transport
+        transport = http_client._transport
+        transport_pool = transport._pool
+        assert transport_pool is not None
+        assert not getattr(transport_pool, "_uds", None)
+        client.close()
+
     @pytest.mark.parametrize(
         "client",
         [
@@ -1505,6 +1566,66 @@ class TestAsyncMiru:
         with update_env(MIRU_BASE_URL="http://localhost:5000/from/env"):
             client = AsyncMiru(_strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
+
+    async def test_socket_path_default_from_env(self) -> None:
+        socket_path = "/tmp/miru-agent-default.sock"
+
+        with update_env(MIRU_AGENT_SOCKET=socket_path):
+            client = AsyncMiru(_strict_response_validation=True)
+
+        transport = client._client._transport
+        assert isinstance(transport, httpx.AsyncHTTPTransport)
+        assert transport._pool._uds == socket_path
+
+        await client.close()
+
+    async def test_socket_path_override_argument(self) -> None:
+        socket_path = "/tmp/miru-agent-override.sock"
+        env_socket_path = "/tmp/miru-agent-env.sock"
+
+        with update_env(MIRU_AGENT_SOCKET=env_socket_path):
+            client = AsyncMiru(socket_path=socket_path, _strict_response_validation=True)
+
+        transport = client._client._transport
+        assert isinstance(transport, httpx.AsyncHTTPTransport)
+        assert transport._pool._uds == socket_path
+
+        await client.close()
+
+    async def test_socket_transport_constructor_uses_env_socket_path(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        socket_path = "/tmp/miru-agent-constructor.sock"
+        captured: dict[str, Any] = {"uds": None}
+
+        class TrackingAsyncHTTPTransport(httpx.AsyncHTTPTransport):
+            def __init__(self, *args: Any, **kwargs: Any) -> None:
+                captured["uds"] = kwargs.get("uds", None)
+                super().__init__(*args, **kwargs)
+
+        monkeypatch.setattr(httpx, "AsyncHTTPTransport", TrackingAsyncHTTPTransport)
+
+        with update_env(MIRU_AGENT_SOCKET=socket_path):
+            client = AsyncMiru(_strict_response_validation=True)
+
+        assert captured["uds"] == socket_path
+        await client.close()
+
+    async def test_socket_path_not_applied_when_client_supplied(self) -> None:
+        custom_transport = httpx.AsyncHTTPTransport()
+        custom_http_client = httpx.AsyncClient(
+            transport=custom_transport,
+            base_url="http://localhost/v0.2",
+            follow_redirects=True,
+            limits=httpx.Limits(max_connections=100, max_keepalive_connections=20),
+        )
+        with update_env(MIRU_AGENT_SOCKET="/tmp/miru-agent-env-overridden.sock"):
+            client = AsyncMiru(http_client=custom_http_client, _strict_response_validation=True)
+
+        http_client = cast(Any, client._client)
+        assert http_client._transport is custom_transport
+        transport = http_client._transport
+        transport_pool = transport._pool
+        assert not getattr(transport_pool, "_uds", None)
+        await client.close()
 
     @pytest.mark.parametrize(
         "client",
