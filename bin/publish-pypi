@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
 set -eux
-rm -rf dist
 mkdir -p dist
-uv build
+rye build --clean
 if [ -n "${PYPI_TOKEN:-}" ]; then
-  uv publish --token=$PYPI_TOKEN
+  rye publish --yes --token=$PYPI_TOKEN
 else
-  uv publish
+  rye publish --yes
 fi
