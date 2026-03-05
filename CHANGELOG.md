@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.3.0-beta.2 (2026-03-05)
+
+Full Changelog: [v0.3.0-beta.1...v0.3.0-beta.2](https://github.com/mirurobotics/python-device-sdk/compare/v0.3.0-beta.1...v0.3.0-beta.2)
+
+### Features
+
+* **api:** bump stainless edition to 2026-02-23 ([31cb0b9](https://github.com/mirurobotics/python-device-sdk/commit/31cb0b94e8799fc1a59ee17c738bbc038b793379))
+
+
+### Bug Fixes
+
+* correct client to talk to the miru unix socket ([4a7b9db](https://github.com/mirurobotics/python-device-sdk/commit/4a7b9db8b0561f82b0212a8e325d20f4cbddde6e))
+* put python edition back to 2025-11-20 ([060cbf1](https://github.com/mirurobotics/python-device-sdk/commit/060cbf118e4ca81f4b9ebdbb73b297965e74598a))
+
 ## 0.3.0-beta.1 (2026-03-05)
 
 Full Changelog: [v0.0.1...v0.3.0-beta.1](https://github.com/mirurobotics/python-device-sdk/compare/v0.0.1...v0.3.0-beta.1)
