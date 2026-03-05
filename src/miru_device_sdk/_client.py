@@ -70,10 +70,10 @@ class Miru(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous Miru client instance.
 
-        This automatically infers the `socket_path` argument from the `MIRU_DEVICE_SOCKET` environment variable if it is not provided.
+        This automatically infers the `socket_path` argument from the `MIRU_AGENT_SOCKET` environment variable if it is not provided.
         """
         if socket_path is None:
-            socket_path = os.environ.get("MIRU_DEVICE_SOCKET") or "/run/miru/miru.sock"
+            socket_path = os.environ.get("MIRU_AGENT_SOCKET") or "/run/miru/miru.sock"
         self.socket_path = socket_path
 
         if base_url is None:
@@ -258,10 +258,10 @@ class AsyncMiru(AsyncAPIClient):
     ) -> None:
         """Construct a new async AsyncMiru client instance.
 
-        This automatically infers the `socket_path` argument from the `MIRU_DEVICE_SOCKET` environment variable if it is not provided.
+        This automatically infers the `socket_path` argument from the `MIRU_AGENT_SOCKET` environment variable if it is not provided.
         """
         if socket_path is None:
-            socket_path = os.environ.get("MIRU_DEVICE_SOCKET") or "/run/miru/miru.sock"
+            socket_path = os.environ.get("MIRU_AGENT_SOCKET") or "/run/miru/miru.sock"
         self.socket_path = socket_path
 
         if base_url is None:
