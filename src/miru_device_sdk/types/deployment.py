@@ -1,51 +1,11 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["Deployment", "ConfigInstance", "ConfigInstanceContent"]
-
-
-class ConfigInstanceContent(BaseModel):
-    """The configuration values associated with the config instance."""
-
-    data: str
-    """The configuration values associated with the config instance."""
-
-    format: Literal["json"]
-
-
-class ConfigInstance(BaseModel):
-    id: str
-    """ID of the config instance."""
-
-    config_schema_id: str
-    """ID of the config schema which the config instance must adhere to."""
-
-    config_type_id: str
-    """ID of the config type which the config instance (and its schema) is a part of."""
-
-    config_type_name: str
-    """The name of the config type."""
-
-    content: ConfigInstanceContent
-    """The configuration values associated with the config instance."""
-
-    created_at: datetime
-    """The timestamp of when the config instance was created."""
-
-    filepath: str
-    """
-    The file path to deploy the config instance relative to
-    `/srv/miru/config_instances`. `v1/motion-control.json` would deploy to
-    `/srv/miru/config_instances/v1/motion-control.json`.
-    """
-
-    object: Literal["config_instance"]
-    """The object type, which is always `config_instance`."""
+__all__ = ["Deployment"]
 
 
 class Deployment(BaseModel):
@@ -112,6 +72,3 @@ class Deployment(BaseModel):
 
     updated_at: datetime
     """Timestamp of when the device release was last updated."""
-
-    config_instances: Optional[List[ConfigInstance]] = None
-    """The config instances associated with this deployment."""

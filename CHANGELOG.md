@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.3.0-beta.3 (2026-03-05)
+
+Full Changelog: [v0.3.0-beta.2...v0.3.0-beta.3](https://github.com/mirurobotics/python-device-sdk/compare/v0.3.0-beta.2...v0.3.0-beta.3)
+
+### Bug Fixes
+
+* remove config instances from being nested inside deployments ([cd35a12](https://github.com/mirurobotics/python-device-sdk/commit/cd35a122583d74cef41db66a63ac42a29d9d8742))
+
+
+### Chores
+
+* update SDK settings ([bc7d9a1](https://github.com/mirurobotics/python-device-sdk/commit/bc7d9a1ea6fe3274804ca7f03f8b61770c201d05))
+* update SDK settings ([10d3ea5](https://github.com/mirurobotics/python-device-sdk/commit/10d3ea5b22ec6f735e602f1c94e068a575b31152))
+
 ## 0.3.0-beta.2 (2026-03-05)
 
 Full Changelog: [v0.3.0-beta.1...v0.3.0-beta.2](https://github.com/mirurobotics/python-device-sdk/compare/v0.3.0-beta.1...v0.3.0-beta.2)
