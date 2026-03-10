@@ -22,8 +22,5 @@ class Release(BaseModel):
     object: Literal["release"]
     """The object type, which is always `release`."""
 
-    updated_at: datetime
-    """Timestamp of when the release was last updated."""
-
     version: str
     """The version of the release."""
