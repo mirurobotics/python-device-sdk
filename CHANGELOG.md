@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.0 (2026-03-10)
+
+Full Changelog: [v0.3.0-beta.3...v0.3.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.3.0-beta.3...v0.3.0)
+
+### Features
+
+* **api:** bump api spec to version v0.2.0 ([a86a5eb](https://github.com/mirurobotics/python-device-sdk/commit/a86a5eb2d0e938d0d6909e68e0a5003157164e4e))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([ac4ece9](https://github.com/mirurobotics/python-device-sdk/commit/ac4ece9a21bd48827186134e590c45547a9ad5a4))
+
 ## 0.3.0-beta.3 (2026-03-05)
 
 Full Changelog: [v0.3.0-beta.2...v0.3.0-beta.3](https://github.com/mirurobotics/python-device-sdk/compare/v0.3.0-beta.2...v0.3.0-beta.3)
