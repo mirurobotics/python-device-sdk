@@ -12,7 +12,7 @@ class Deployment(BaseModel):
     id: str
     """ID of the deployment."""
 
-    activity_status: Literal["drifted", "staged", "queued", "deployed", "archived"]
+    activity_status: Literal["drifted", "staged", "queued", "deployed", "removing", "archived"]
     """Last known activity state of the deployment.
 
     `drifted` means the device's configurations have drifted since this deployment
@@ -25,6 +25,9 @@ class Deployment(BaseModel):
 
     `deployed` means the deployment's config instances are currently available for
     consumption on the device.
+
+    `removing` means the deployment's config instances are being removed from the
+    device.
 
     `archived` means the deployment is available for historical reference but cannot
     be deployed and is not active on the device.
@@ -57,7 +60,7 @@ class Deployment(BaseModel):
     release_id: str
     """ID of the release."""
 
-    status: Literal["drifted", "staged", "queued", "deployed", "archived", "failed", "retrying"]
+    status: Literal["drifted", "staged", "queued", "deployed", "removing", "archived", "failed", "retrying"]
     """
     This status merges the 'activity_status' and 'error_status' fields, with error
     states taking precedence over activity states when errors are present. For
