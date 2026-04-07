@@ -57,6 +57,10 @@ Types:
 from miru_device_sdk.types import DeploymentDeployed, DeploymentRemoved, Event
 ```
 
+Methods:
+
+- <code title="get /events">client.events.<a href="./src/miru_device_sdk/resources/events.py">stream</a>(\*\*<a href="src/miru_device_sdk/types/event_stream_params.py">params</a>) -> <a href="./src/miru_device_sdk/types/event.py">Event</a></code>
+
 # Releases
 
 Types:
