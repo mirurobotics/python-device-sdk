@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.4.0-beta.1 (2026-04-07)
+
+Full Changelog: [v0.3.0...v0.4.0-beta.1](https://github.com/mirurobotics/python-device-sdk/compare/v0.3.0...v0.4.0-beta.1)
+
+### Features
+
+* **api:** regenerate with v0.2.1 release version ([5c227e5](https://github.com/mirurobotics/python-device-sdk/commit/5c227e56961d6bd0c2bc6fc85db25ac4cd0fffa6))
+* **internal:** implement indices array format for query and form serialization ([b737cae](https://github.com/mirurobotics/python-device-sdk/commit/b737cae51f1e2e7171767ec1638a3a0b794b05c4))
+
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([5787705](https://github.com/mirurobotics/python-device-sdk/commit/5787705bd4d745b52113af76a37532ab6b1ecb6d))
+* **pydantic:** do not pass `by_alias` unless set ([ebde1af](https://github.com/mirurobotics/python-device-sdk/commit/ebde1af34610a632c00c5bcef2915a1fd5bac315))
+* sanitize endpoint path params ([757293e](https://github.com/mirurobotics/python-device-sdk/commit/757293ec4220d42156d996cf24b47a4118fdfd77))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([4f76a08](https://github.com/mirurobotics/python-device-sdk/commit/4f76a088c4fd75483e252ff09d9e3e14e33f938b))
+* **internal:** tweak CI branches ([c197558](https://github.com/mirurobotics/python-device-sdk/commit/c1975584103308b7e1e2ee909a73a83e456c5002))
+* **internal:** update gitignore ([7a1b103](https://github.com/mirurobotics/python-device-sdk/commit/7a1b10309ddc8a64e87b4d55c4b9ccd5296c67d3))
+* move event definitions to shared section stainless spec ([f83513a](https://github.com/mirurobotics/python-device-sdk/commit/f83513a4c89ff2ee8e36edb8fa1bfcc354db48cd))
+
+
+### Refactors
+
+* don't skip stream endpoint ([2dd2504](https://github.com/mirurobotics/python-device-sdk/commit/2dd25040ff22f140b81dfa90905d3a2b4935de06))
+* remove stream endpoint ([b392d58](https://github.com/mirurobotics/python-device-sdk/commit/b392d580bc44319d70ad9a1c706c32bad48f341f))
+
 ## 0.3.0 (2026-03-10)
 
 Full Changelog: [v0.3.0-beta.3...v0.3.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.3.0-beta.3...v0.3.0)
