@@ -16,14 +16,6 @@ from .device import (
     DeviceResourceWithStreamingResponse,
     AsyncDeviceResourceWithStreamingResponse,
 )
-from .events import (
-    EventsResource,
-    AsyncEventsResource,
-    EventsResourceWithRawResponse,
-    AsyncEventsResourceWithRawResponse,
-    EventsResourceWithStreamingResponse,
-    AsyncEventsResourceWithStreamingResponse,
-)
 from .releases import (
     ReleasesResource,
     AsyncReleasesResource,
@@ -74,12 +66,6 @@ __all__ = [
     "AsyncGitCommitsResourceWithRawResponse",
     "GitCommitsResourceWithStreamingResponse",
     "AsyncGitCommitsResourceWithStreamingResponse",
-    "EventsResource",
-    "AsyncEventsResource",
-    "EventsResourceWithRawResponse",
-    "AsyncEventsResourceWithRawResponse",
-    "EventsResourceWithStreamingResponse",
-    "AsyncEventsResourceWithStreamingResponse",
     "ReleasesResource",
     "AsyncReleasesResource",
     "ReleasesResourceWithRawResponse",

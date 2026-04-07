@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from .event import Event as Event
+from .shared import Event as Event, DeploymentRemoved as DeploymentRemoved, DeploymentDeployed as DeploymentDeployed
 from .release import Release as Release
 from .deployment import Deployment as Deployment
 from .git_commit import GitCommit as GitCommit
-from .event_stream_params import EventStreamParams as EventStreamParams
 from .device_sync_response import DeviceSyncResponse as DeviceSyncResponse
 from .agent_health_response import AgentHealthResponse as AgentHealthResponse
 from .agent_version_response import AgentVersionResponse as AgentVersionResponse
