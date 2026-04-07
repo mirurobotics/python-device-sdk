@@ -1,3 +1,9 @@
+# Shared Types
+
+```python
+from miru_device_sdk.types import DeploymentDeployed, DeploymentRemoved, Event
+```
+
 # Agent
 
 Types:

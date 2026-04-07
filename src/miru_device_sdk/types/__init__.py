@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .shared import Event as Event, DeploymentRemoved as DeploymentRemoved, DeploymentDeployed as DeploymentDeployed
 from .release import Release as Release
 from .deployment import Deployment as Deployment
 from .git_commit import GitCommit as GitCommit

@@ -1,16 +1,18 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
-from .._models import BaseModel
+from ..._models import BaseModel
 
-__all__ = ["Deployment"]
+__all__ = ["DeploymentRemoved"]
 
 
-class Deployment(BaseModel):
-    id: str
-    """ID of the deployment."""
+class DeploymentRemoved(BaseModel):
+    """
+    Emitted when a deployment's config instances have been removed from the device's filesystem and the deployment has been archived. Use this event to clean up resources or stop services that depended on the removed configuration.
+    """
 
     activity_status: Literal["drifted", "staged", "queued", "deployed", "removing", "archived"]
     """Last known activity state of the deployment.
@@ -33,14 +35,8 @@ class Deployment(BaseModel):
     be deployed and is not active on the device.
     """
 
-    created_at: datetime
-    """Timestamp of when the device release was created."""
-
-    description: str
-    """The description of the deployment."""
-
-    device_id: str
-    """ID of the device."""
+    deployment_id: str
+    """ID of the deployment."""
 
     error_status: Literal["none", "failed", "retrying"]
     """Last known error state of the deployment.
@@ -54,11 +50,8 @@ class Deployment(BaseModel):
     and, if deployed, removed from the device.
     """
 
-    object: Literal["deployment"]
-    """The object type, which is always `deployment`."""
-
     release_id: str
-    """ID of the release."""
+    """ID of the release associated with this deployment."""
 
     status: Literal["drifted", "staged", "queued", "deployed", "removing", "archived", "failed", "retrying"]
     """
@@ -80,3 +73,6 @@ class Deployment(BaseModel):
     `archived` means the deployment is available for historical reference but cannot
     be deployed and is not active on the device.
     """
+
+    archived_at: Optional[datetime] = None
+    """Timestamp of when the deployment was archived."""
