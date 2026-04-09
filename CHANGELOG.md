@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 (2026-04-09)
+
+Full Changelog: [v0.4.0-beta.1...v0.4.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.4.0-beta.1...v0.4.0)
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([60fcd65](https://github.com/mirurobotics/python-device-sdk/commit/60fcd65ff9436bb249c1efad1c4d4517dbe5365b))
+
 ## 0.4.0-beta.1 (2026-04-07)
 
 Full Changelog: [v0.3.0...v0.4.0-beta.1](https://github.com/mirurobotics/python-device-sdk/compare/v0.3.0...v0.4.0-beta.1)
