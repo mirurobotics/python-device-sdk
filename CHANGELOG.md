@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.1 (2026-04-11)
+
+Full Changelog: [v0.4.0...v0.4.1](https://github.com/mirurobotics/python-device-sdk/compare/v0.4.0...v0.4.1)
+
+### Bug Fixes
+
+* ensure file data are only sent as 1 parameter ([04d351a](https://github.com/mirurobotics/python-device-sdk/commit/04d351a9b1708e7e9a807a7f8691134f0c8b2a5a))
+
 ## 0.4.0 (2026-04-09)
 
 Full Changelog: [v0.4.0-beta.1...v0.4.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.4.0-beta.1...v0.4.0)
