@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.2 (2026-04-18)
+
+Full Changelog: [v0.4.1...v0.4.2](https://github.com/mirurobotics/python-device-sdk/compare/v0.4.1...v0.4.2)
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([fd3b74c](https://github.com/mirurobotics/python-device-sdk/commit/fd3b74cd8ecdcef06990954af65b75ad7837cb16))
+
 ## 0.4.1 (2026-04-11)
 
 Full Changelog: [v0.4.0...v0.4.1](https://github.com/mirurobotics/python-device-sdk/compare/v0.4.0...v0.4.1)
