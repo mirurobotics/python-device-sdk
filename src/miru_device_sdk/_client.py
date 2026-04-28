@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import TYPE_CHECKING, Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping, cast
 from typing_extensions import Self, override
 
 import httpx
@@ -29,7 +29,9 @@ from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError
 from ._base_client import (
+    DEFAULT_TIMEOUT,
     DEFAULT_MAX_RETRIES,
+    DEFAULT_CONNECTION_LIMITS,
     SyncAPIClient,
     AsyncAPIClient,
 )
@@ -43,6 +45,36 @@ if TYPE_CHECKING:
     from .resources.git_commits import GitCommitsResource, AsyncGitCommitsResource
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Miru", "AsyncMiru", "Client", "AsyncClient"]
+
+
+def _build_sync_httpx_client(
+    *,
+    socket_path: str,
+    base_url: str | httpx.URL,
+    timeout: float | Timeout | None | NotGiven,
+) -> httpx.Client:
+    return httpx.Client(
+        base_url=base_url,
+        timeout=cast(Timeout, timeout if is_given(timeout) else DEFAULT_TIMEOUT),
+        limits=DEFAULT_CONNECTION_LIMITS,
+        follow_redirects=True,
+        transport=httpx.HTTPTransport(uds=socket_path),
+    )
+
+
+def _build_async_httpx_client(
+    *,
+    socket_path: str,
+    base_url: str | httpx.URL,
+    timeout: float | Timeout | None | NotGiven,
+) -> httpx.AsyncClient:
+    return httpx.AsyncClient(
+        base_url=base_url,
+        timeout=cast(Timeout, timeout if is_given(timeout) else DEFAULT_TIMEOUT),
+        limits=DEFAULT_CONNECTION_LIMITS,
+        follow_redirects=True,
+        transport=httpx.AsyncHTTPTransport(uds=socket_path),
+    )
 
 
 class Miru(SyncAPIClient):
@@ -84,6 +116,21 @@ class Miru(SyncAPIClient):
             base_url = os.environ.get("MIRU_BASE_URL")
         if base_url is None:
             base_url = f"http://localhost/v0.2"
+        if http_client is None:
+            http_client = _build_sync_httpx_client(
+                socket_path=socket_path,
+                base_url=base_url,
+                timeout=timeout,
+            )
+
+        custom_headers_env = os.environ.get("MIRU_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
 
         custom_headers_env = os.environ.get("MIRU_CUSTOM_HEADERS")
         if custom_headers_env is not None:
@@ -281,6 +328,21 @@ class AsyncMiru(AsyncAPIClient):
             base_url = os.environ.get("MIRU_BASE_URL")
         if base_url is None:
             base_url = f"http://localhost/v0.2"
+        if http_client is None:
+            http_client = _build_async_httpx_client(
+                socket_path=socket_path,
+                base_url=base_url,
+                timeout=timeout,
+            )
+
+        custom_headers_env = os.environ.get("MIRU_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
 
         custom_headers_env = os.environ.get("MIRU_CUSTOM_HEADERS")
         if custom_headers_env is not None:
