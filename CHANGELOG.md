@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.5.0 (2026-04-28)
+
+Full Changelog: [v0.4.2...v0.5.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.4.2...v0.5.0)
+
+### Features
+
+* support setting headers via env ([da7da67](https://github.com/mirurobotics/python-device-sdk/commit/da7da6791838df33e5434184474e1d108439d452))
+
+
+### Bug Fixes
+
+* use correct field name format for multipart file arrays ([6a12b31](https://github.com/mirurobotics/python-device-sdk/commit/6a12b315a3abaf3047c46378a152533aefc28fed))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([c35b72a](https://github.com/mirurobotics/python-device-sdk/commit/c35b72ad6ba2abfdbdf8a0f39701f27ccf8e73bb))
+
 ## 0.4.2 (2026-04-18)
 
 Full Changelog: [v0.4.1...v0.4.2](https://github.com/mirurobotics/python-device-sdk/compare/v0.4.1...v0.4.2)
