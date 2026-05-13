@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.6.0 (2026-05-13)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **internal/types:** support eagerly validating pydantic iterators ([7eeeef4](https://github.com/mirurobotics/python-device-sdk/commit/7eeeef4959b712d8a775756a9ccfcf118fa44557))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([c2a3082](https://github.com/mirurobotics/python-device-sdk/commit/c2a3082060589bd138f23d238c49f18fcbb507fe))
+
+
+### Chores
+
+* **internal:** reformat pyproject.toml ([0b1f068](https://github.com/mirurobotics/python-device-sdk/commit/0b1f0687b6a70d6628bec935d6db08fc0d08a63d))
+
 ## 0.5.0 (2026-04-28)
 
 Full Changelog: [v0.4.2...v0.5.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.4.2...v0.5.0)
