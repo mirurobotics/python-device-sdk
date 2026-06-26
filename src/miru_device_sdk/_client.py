@@ -35,9 +35,10 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import agent, device, releases, deployments, git_commits
+    from .resources import agent, device, events, releases, deployments, git_commits
     from .resources.agent import AgentResource, AsyncAgentResource
     from .resources.device import DeviceResource, AsyncDeviceResource
+    from .resources.events import EventsResource, AsyncEventsResource
     from .resources.releases import ReleasesResource, AsyncReleasesResource
     from .resources.deployments import DeploymentsResource, AsyncDeploymentsResource
     from .resources.git_commits import GitCommitsResource, AsyncGitCommitsResource
@@ -128,6 +129,12 @@ class Miru(SyncAPIClient):
         from .resources.git_commits import GitCommitsResource
 
         return GitCommitsResource(self)
+
+    @cached_property
+    def events(self) -> EventsResource:
+        from .resources.events import EventsResource
+
+        return EventsResource(self)
 
     @cached_property
     def releases(self) -> ReleasesResource:
@@ -327,6 +334,12 @@ class AsyncMiru(AsyncAPIClient):
         return AsyncGitCommitsResource(self)
 
     @cached_property
+    def events(self) -> AsyncEventsResource:
+        from .resources.events import AsyncEventsResource
+
+        return AsyncEventsResource(self)
+
+    @cached_property
     def releases(self) -> AsyncReleasesResource:
         from .resources.releases import AsyncReleasesResource
 
@@ -470,6 +483,12 @@ class MiruWithRawResponse:
         return GitCommitsResourceWithRawResponse(self._client.git_commits)
 
     @cached_property
+    def events(self) -> events.EventsResourceWithRawResponse:
+        from .resources.events import EventsResourceWithRawResponse
+
+        return EventsResourceWithRawResponse(self._client.events)
+
+    @cached_property
     def releases(self) -> releases.ReleasesResourceWithRawResponse:
         from .resources.releases import ReleasesResourceWithRawResponse
 
@@ -505,6 +524,12 @@ class AsyncMiruWithRawResponse:
         from .resources.git_commits import AsyncGitCommitsResourceWithRawResponse
 
         return AsyncGitCommitsResourceWithRawResponse(self._client.git_commits)
+
+    @cached_property
+    def events(self) -> events.AsyncEventsResourceWithRawResponse:
+        from .resources.events import AsyncEventsResourceWithRawResponse
+
+        return AsyncEventsResourceWithRawResponse(self._client.events)
 
     @cached_property
     def releases(self) -> releases.AsyncReleasesResourceWithRawResponse:
@@ -544,6 +569,12 @@ class MiruWithStreamedResponse:
         return GitCommitsResourceWithStreamingResponse(self._client.git_commits)
 
     @cached_property
+    def events(self) -> events.EventsResourceWithStreamingResponse:
+        from .resources.events import EventsResourceWithStreamingResponse
+
+        return EventsResourceWithStreamingResponse(self._client.events)
+
+    @cached_property
     def releases(self) -> releases.ReleasesResourceWithStreamingResponse:
         from .resources.releases import ReleasesResourceWithStreamingResponse
 
@@ -579,6 +610,12 @@ class AsyncMiruWithStreamedResponse:
         from .resources.git_commits import AsyncGitCommitsResourceWithStreamingResponse
 
         return AsyncGitCommitsResourceWithStreamingResponse(self._client.git_commits)
+
+    @cached_property
+    def events(self) -> events.AsyncEventsResourceWithStreamingResponse:
+        from .resources.events import AsyncEventsResourceWithStreamingResponse
+
+        return AsyncEventsResourceWithStreamingResponse(self._client.events)
 
     @cached_property
     def releases(self) -> releases.AsyncReleasesResourceWithStreamingResponse:
