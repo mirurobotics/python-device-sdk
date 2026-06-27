@@ -11,6 +11,9 @@ class AgentVersionResponse(BaseModel):
     api_git_commit: str
     """The git commit of the API."""
 
+    api_release_version: str
+    """The API release version of the agent."""
+
     api_version: str
     """The API version of the agent."""
 

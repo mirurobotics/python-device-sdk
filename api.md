@@ -1,9 +1,3 @@
-# Shared Types
-
-```python
-from miru_device_sdk.types import DeploymentDeployed, DeploymentRemoved, Event
-```
-
 # Agent
 
 Types:
@@ -54,6 +48,18 @@ from miru_device_sdk.types import GitCommit
 Methods:
 
 - <code title="get /git_commits/{git_commit_id}">client.git_commits.<a href="./src/miru_device_sdk/resources/git_commits.py">retrieve</a>(git_commit_id) -> <a href="./src/miru_device_sdk/types/git_commit.py">GitCommit</a></code>
+
+# Events
+
+Types:
+
+```python
+from miru_device_sdk.types import DeploymentDeployed, DeploymentRemoved, Event
+```
+
+Methods:
+
+- <code title="get /events">client.events.<a href="./src/miru_device_sdk/resources/events.py">stream</a>(\*\*<a href="src/miru_device_sdk/types/event_stream_params.py">params</a>) -> <a href="./src/miru_device_sdk/types/event.py">Event</a></code>
 
 # Releases
 
