@@ -26,6 +26,7 @@ class TestAgent:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_health(self, client: Miru) -> None:
+
         response = client.agent.with_raw_response.health()
 
         assert response.is_closed is True
@@ -54,6 +55,7 @@ class TestAgent:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_version(self, client: Miru) -> None:
+
         response = client.agent.with_raw_response.version()
 
         assert response.is_closed is True
@@ -88,6 +90,7 @@ class TestAsyncAgent:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_health(self, async_client: AsyncMiru) -> None:
+
         response = await async_client.agent.with_raw_response.health()
 
         assert response.is_closed is True
@@ -116,6 +119,7 @@ class TestAsyncAgent:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_version(self, async_client: AsyncMiru) -> None:
+
         response = await async_client.agent.with_raw_response.version()
 
         assert response.is_closed is True

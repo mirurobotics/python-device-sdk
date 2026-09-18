@@ -26,6 +26,7 @@ class TestDevice:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Miru) -> None:
+
         response = client.device.with_raw_response.retrieve()
 
         assert response.is_closed is True
@@ -54,6 +55,7 @@ class TestDevice:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_sync(self, client: Miru) -> None:
+
         response = client.device.with_raw_response.sync()
 
         assert response.is_closed is True
@@ -88,6 +90,7 @@ class TestAsyncDevice:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncMiru) -> None:
+
         response = await async_client.device.with_raw_response.retrieve()
 
         assert response.is_closed is True
@@ -116,6 +119,7 @@ class TestAsyncDevice:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_sync(self, async_client: AsyncMiru) -> None:
+
         response = await async_client.device.with_raw_response.sync()
 
         assert response.is_closed is True
