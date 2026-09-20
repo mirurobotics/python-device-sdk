@@ -34,7 +34,6 @@ class TestEvents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_stream(self, client: Miru) -> None:
-
         response = client.events.with_raw_response.stream()
 
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -78,7 +77,6 @@ class TestAsyncEvents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_stream(self, async_client: AsyncMiru) -> None:
-
         response = await async_client.events.with_raw_response.stream()
 
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"

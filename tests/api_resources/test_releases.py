@@ -28,7 +28,6 @@ class TestReleases:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Miru) -> None:
-
         response = client.releases.with_raw_response.retrieve(
             "rls_123",
         )
@@ -69,7 +68,6 @@ class TestReleases:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_current(self, client: Miru) -> None:
-
         response = client.releases.with_raw_response.current()
 
         assert response.is_closed is True
@@ -106,7 +104,6 @@ class TestAsyncReleases:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncMiru) -> None:
-
         response = await async_client.releases.with_raw_response.retrieve(
             "rls_123",
         )
@@ -147,7 +144,6 @@ class TestAsyncReleases:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_current(self, async_client: AsyncMiru) -> None:
-
         response = await async_client.releases.with_raw_response.current()
 
         assert response.is_closed is True
