@@ -37,6 +37,18 @@ Methods:
 - <code title="get /device">client.device.<a href="./src/miru_device_sdk/resources/device.py">retrieve</a>() -> <a href="./src/miru_device_sdk/types/device_retrieve_response.py">DeviceRetrieveResponse</a></code>
 - <code title="post /device/sync">client.device.<a href="./src/miru_device_sdk/resources/device.py">sync</a>() -> <a href="./src/miru_device_sdk/types/device_sync_response.py">DeviceSyncResponse</a></code>
 
+# FileRules
+
+Types:
+
+```python
+from miru_device_sdk.types import FileRule
+```
+
+Methods:
+
+- <code title="get /file_rules/{file_rule_id}">client.file_rules.<a href="./src/miru_device_sdk/resources/file_rules.py">retrieve</a>(file_rule_id) -> <a href="./src/miru_device_sdk/types/file_rule.py">FileRule</a></code>
+
 # GitCommits
 
 Types:

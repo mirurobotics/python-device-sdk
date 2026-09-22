@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -15,6 +15,12 @@ class Release(BaseModel):
 
     created_at: datetime
     """Timestamp of when the release was created."""
+
+    file_rule_ids: List[str]
+    """IDs of the file rules included in this release.
+
+    Retrieve each file rule with `GET /file_rules/{file_rule_id}`.
+    """
 
     git_commit_id: Optional[str] = None
     """The ID of the git commit associated with this release."""

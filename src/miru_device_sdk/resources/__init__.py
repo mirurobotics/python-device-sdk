@@ -32,6 +32,14 @@ from .releases import (
     ReleasesResourceWithStreamingResponse,
     AsyncReleasesResourceWithStreamingResponse,
 )
+from .file_rules import (
+    FileRulesResource,
+    AsyncFileRulesResource,
+    FileRulesResourceWithRawResponse,
+    AsyncFileRulesResourceWithRawResponse,
+    FileRulesResourceWithStreamingResponse,
+    AsyncFileRulesResourceWithStreamingResponse,
+)
 from .deployments import (
     DeploymentsResource,
     AsyncDeploymentsResource,
@@ -68,6 +76,12 @@ __all__ = [
     "AsyncDeviceResourceWithRawResponse",
     "DeviceResourceWithStreamingResponse",
     "AsyncDeviceResourceWithStreamingResponse",
+    "FileRulesResource",
+    "AsyncFileRulesResource",
+    "FileRulesResourceWithRawResponse",
+    "AsyncFileRulesResourceWithRawResponse",
+    "FileRulesResourceWithStreamingResponse",
+    "AsyncFileRulesResourceWithStreamingResponse",
     "GitCommitsResource",
     "AsyncGitCommitsResource",
     "GitCommitsResourceWithRawResponse",

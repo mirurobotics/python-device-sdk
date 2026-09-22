@@ -37,11 +37,12 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import agent, device, events, releases, deployments, git_commits
+    from .resources import agent, device, events, releases, file_rules, deployments, git_commits
     from .resources.agent import AgentResource, AsyncAgentResource
     from .resources.device import DeviceResource, AsyncDeviceResource
     from .resources.events import EventsResource, AsyncEventsResource
     from .resources.releases import ReleasesResource, AsyncReleasesResource
+    from .resources.file_rules import FileRulesResource, AsyncFileRulesResource
     from .resources.deployments import DeploymentsResource, AsyncDeploymentsResource
     from .resources.git_commits import GitCommitsResource, AsyncGitCommitsResource
 
@@ -161,6 +162,12 @@ class Miru(SyncAPIClient):
         from .resources.device import DeviceResource
 
         return DeviceResource(self)
+
+    @cached_property
+    def file_rules(self) -> FileRulesResource:
+        from .resources.file_rules import FileRulesResource
+
+        return FileRulesResource(self)
 
     @cached_property
     def git_commits(self) -> GitCommitsResource:
@@ -372,6 +379,12 @@ class AsyncMiru(AsyncAPIClient):
         return AsyncDeviceResource(self)
 
     @cached_property
+    def file_rules(self) -> AsyncFileRulesResource:
+        from .resources.file_rules import AsyncFileRulesResource
+
+        return AsyncFileRulesResource(self)
+
+    @cached_property
     def git_commits(self) -> AsyncGitCommitsResource:
         from .resources.git_commits import AsyncGitCommitsResource
 
@@ -521,6 +534,12 @@ class MiruWithRawResponse:
         return DeviceResourceWithRawResponse(self._client.device)
 
     @cached_property
+    def file_rules(self) -> file_rules.FileRulesResourceWithRawResponse:
+        from .resources.file_rules import FileRulesResourceWithRawResponse
+
+        return FileRulesResourceWithRawResponse(self._client.file_rules)
+
+    @cached_property
     def git_commits(self) -> git_commits.GitCommitsResourceWithRawResponse:
         from .resources.git_commits import GitCommitsResourceWithRawResponse
 
@@ -562,6 +581,12 @@ class AsyncMiruWithRawResponse:
         from .resources.device import AsyncDeviceResourceWithRawResponse
 
         return AsyncDeviceResourceWithRawResponse(self._client.device)
+
+    @cached_property
+    def file_rules(self) -> file_rules.AsyncFileRulesResourceWithRawResponse:
+        from .resources.file_rules import AsyncFileRulesResourceWithRawResponse
+
+        return AsyncFileRulesResourceWithRawResponse(self._client.file_rules)
 
     @cached_property
     def git_commits(self) -> git_commits.AsyncGitCommitsResourceWithRawResponse:
@@ -607,6 +632,12 @@ class MiruWithStreamedResponse:
         return DeviceResourceWithStreamingResponse(self._client.device)
 
     @cached_property
+    def file_rules(self) -> file_rules.FileRulesResourceWithStreamingResponse:
+        from .resources.file_rules import FileRulesResourceWithStreamingResponse
+
+        return FileRulesResourceWithStreamingResponse(self._client.file_rules)
+
+    @cached_property
     def git_commits(self) -> git_commits.GitCommitsResourceWithStreamingResponse:
         from .resources.git_commits import GitCommitsResourceWithStreamingResponse
 
@@ -648,6 +679,12 @@ class AsyncMiruWithStreamedResponse:
         from .resources.device import AsyncDeviceResourceWithStreamingResponse
 
         return AsyncDeviceResourceWithStreamingResponse(self._client.device)
+
+    @cached_property
+    def file_rules(self) -> file_rules.AsyncFileRulesResourceWithStreamingResponse:
+        from .resources.file_rules import AsyncFileRulesResourceWithStreamingResponse
+
+        return AsyncFileRulesResourceWithStreamingResponse(self._client.file_rules)
 
     @cached_property
     def git_commits(self) -> git_commits.AsyncGitCommitsResourceWithStreamingResponse:

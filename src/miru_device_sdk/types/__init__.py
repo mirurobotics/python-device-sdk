@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from .event import Event as Event
 from .release import Release as Release
+from .file_rule import FileRule as FileRule
 from .deployment import Deployment as Deployment
 from .git_commit import GitCommit as GitCommit
 from .event_stream_params import EventStreamParams as EventStreamParams
