@@ -13,8 +13,9 @@ class Source(BaseModel):
     glob: str
     """A glob pattern selecting the files this rule manages.
 
-    Must be absolute (start with `/`), at most 1024 bytes, and must contain no `..`
-    segments and no empty path segments.
+    Must be absolute (start with `/` on Linux, or a drive letter followed by `:\\`` or
+    `:/` on Windows, e.g. `C:\\llogs\\**.log`), at most 1024 bytes, and must contain no
+    `..` segments and no empty path segments.
     """
 
     stability_window_secs: int
@@ -126,6 +127,16 @@ class FileRule(BaseModel):
 
     object: Literal["file_rule"]
     """The object type, which is always `file_rule`."""
+
+    os: Literal["linux", "windows"]
+    """An operating system family, from the agent's build-time OS vocabulary.
+
+    Shared across resources (devices, config schemas, file rules, releases). This is
+    the machine-readable OS kind, distinct from a human-readable version string.
+
+    - `linux`
+    - `windows`
+    """
 
     source: Source
 

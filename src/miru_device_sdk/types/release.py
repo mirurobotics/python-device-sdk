@@ -28,5 +28,15 @@ class Release(BaseModel):
     object: Literal["release"]
     """The object type, which is always `release`."""
 
+    os: Literal["linux", "windows"]
+    """An operating system family, from the agent's build-time OS vocabulary.
+
+    Shared across resources (devices, config schemas, file rules, releases). This is
+    the machine-readable OS kind, distinct from a human-readable version string.
+
+    - `linux`
+    - `windows`
+    """
+
     version: str
     """The version of the release."""
