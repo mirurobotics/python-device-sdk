@@ -82,11 +82,17 @@ def _build_async_httpx_client(
 class Miru(SyncAPIClient):
     # client options
     socket_path: str
+    agent_transport: str | None
+    discovery_file: str | None
+    bearer_token: str | None
 
     def __init__(
         self,
         *,
         socket_path: str | None = None,
+        agent_transport: str | None = None,
+        discovery_file: str | None = None,
+        bearer_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -108,11 +114,27 @@ class Miru(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous Miru client instance.
 
-        This automatically infers the `socket_path` argument from the `MIRU_AGENT_SOCKET` environment variable if it is not provided.
+        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
+        - `socket_path` from `MIRU_AGENT_SOCKET`
+        - `agent_transport` from `MIRU_AGENT_TRANSPORT`
+        - `discovery_file` from `MIRU_AGENT_DISCOVERY_FILE`
+        - `bearer_token` from `MIRU_AGENT_TOKEN`
         """
         if socket_path is None:
             socket_path = os.environ.get("MIRU_AGENT_SOCKET") or "/run/miru/miru.sock"
         self.socket_path = socket_path
+
+        if agent_transport is None:
+            agent_transport = os.environ.get("MIRU_AGENT_TRANSPORT")
+        self.agent_transport = agent_transport
+
+        if discovery_file is None:
+            discovery_file = os.environ.get("MIRU_AGENT_DISCOVERY_FILE")
+        self.discovery_file = discovery_file
+
+        if bearer_token is None:
+            bearer_token = os.environ.get("MIRU_AGENT_TOKEN")
+        self.bearer_token = bearer_token
 
         if base_url is None:
             base_url = os.environ.get("MIRU_BASE_URL")
@@ -202,6 +224,14 @@ class Miru(SyncAPIClient):
 
     @property
     @override
+    def auth_headers(self) -> dict[str, str]:
+        bearer_token = self.bearer_token
+        if bearer_token is None:
+            return {}
+        return {"Authorization": f"Bearer {bearer_token}"}
+
+    @property
+    @override
     def default_headers(self) -> dict[str, str | Omit]:
         return {
             **super().default_headers,
@@ -213,6 +243,9 @@ class Miru(SyncAPIClient):
         self,
         *,
         socket_path: str | None = None,
+        agent_transport: str | None = None,
+        discovery_file: str | None = None,
+        bearer_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
@@ -247,6 +280,9 @@ class Miru(SyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             socket_path=socket_path or self.socket_path,
+            agent_transport=agent_transport or self.agent_transport,
+            discovery_file=discovery_file or self.discovery_file,
+            bearer_token=bearer_token or self.bearer_token,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -297,11 +333,17 @@ class Miru(SyncAPIClient):
 class AsyncMiru(AsyncAPIClient):
     # client options
     socket_path: str
+    agent_transport: str | None
+    discovery_file: str | None
+    bearer_token: str | None
 
     def __init__(
         self,
         *,
         socket_path: str | None = None,
+        agent_transport: str | None = None,
+        discovery_file: str | None = None,
+        bearer_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -323,11 +365,27 @@ class AsyncMiru(AsyncAPIClient):
     ) -> None:
         """Construct a new async AsyncMiru client instance.
 
-        This automatically infers the `socket_path` argument from the `MIRU_AGENT_SOCKET` environment variable if it is not provided.
+        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
+        - `socket_path` from `MIRU_AGENT_SOCKET`
+        - `agent_transport` from `MIRU_AGENT_TRANSPORT`
+        - `discovery_file` from `MIRU_AGENT_DISCOVERY_FILE`
+        - `bearer_token` from `MIRU_AGENT_TOKEN`
         """
         if socket_path is None:
             socket_path = os.environ.get("MIRU_AGENT_SOCKET") or "/run/miru/miru.sock"
         self.socket_path = socket_path
+
+        if agent_transport is None:
+            agent_transport = os.environ.get("MIRU_AGENT_TRANSPORT")
+        self.agent_transport = agent_transport
+
+        if discovery_file is None:
+            discovery_file = os.environ.get("MIRU_AGENT_DISCOVERY_FILE")
+        self.discovery_file = discovery_file
+
+        if bearer_token is None:
+            bearer_token = os.environ.get("MIRU_AGENT_TOKEN")
+        self.bearer_token = bearer_token
 
         if base_url is None:
             base_url = os.environ.get("MIRU_BASE_URL")
@@ -417,6 +475,14 @@ class AsyncMiru(AsyncAPIClient):
 
     @property
     @override
+    def auth_headers(self) -> dict[str, str]:
+        bearer_token = self.bearer_token
+        if bearer_token is None:
+            return {}
+        return {"Authorization": f"Bearer {bearer_token}"}
+
+    @property
+    @override
     def default_headers(self) -> dict[str, str | Omit]:
         return {
             **super().default_headers,
@@ -428,6 +494,9 @@ class AsyncMiru(AsyncAPIClient):
         self,
         *,
         socket_path: str | None = None,
+        agent_transport: str | None = None,
+        discovery_file: str | None = None,
+        bearer_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
@@ -462,6 +531,9 @@ class AsyncMiru(AsyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             socket_path=socket_path or self.socket_path,
+            agent_transport=agent_transport or self.agent_transport,
+            discovery_file=discovery_file or self.discovery_file,
+            bearer_token=bearer_token or self.bearer_token,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,

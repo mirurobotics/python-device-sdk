@@ -33,6 +33,11 @@ device = client.device.retrieve()
 print(device.id)
 ```
 
+While you can provide a `bearer_token` keyword argument,
+we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
+to add `MIRU_AGENT_TOKEN="My Bearer Token"` to your `.env` file
+so that your Bearer Token is not stored in source control.
+
 ## Async usage
 
 Simply import `AsyncMiru` instead of `Miru` and use `await` with each API call:
