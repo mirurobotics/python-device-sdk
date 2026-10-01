@@ -33,10 +33,36 @@ device = client.device.retrieve()
 print(device.id)
 ```
 
-While you can provide a `bearer_token` keyword argument,
-we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `MIRU_AGENT_TOKEN="My Bearer Token"` to your `.env` file
-so that your Bearer Token is not stored in source control.
+## Connecting to the agent
+
+The client talks to the Miru Agent running on the same device:
+
+- **Linux** (default): over the agent's Unix socket, `/run/miru/miru.sock`
+  (`socket_path` or `MIRU_AGENT_SOCKET`). The socket needs no token; access is
+  limited to the `miru` group.
+- **Windows** (default), or `agent_transport="tcp"` / `MIRU_AGENT_TRANSPORT=tcp`:
+  over loopback TCP with a bearer token. The agent publishes its port and token
+  in a discovery file, `%ProgramData%\Miru\device-api\device-api.json` on
+  Windows and `/run/miru/device-api.json` on Linux (`discovery_file` or
+  `MIRU_AGENT_DISCOVERY_FILE`). The client reads it and picks up the new token
+  and port whenever the agent restarts. On Windows the account must be an
+  administrator or a member of the local `Miru Agent Users` group to read the file.
+
+You don't need to set `bearer_token` (`MIRU_AGENT_TOKEN`): the token changes
+every time the agent starts. Setting it turns off the discovery file, and you
+must then also set `base_url` to the agent's address.
+
+If you pass your own `http_client` over TCP, wrap its transport in
+`miru_device_sdk.lib.device_api.DiscoveryTransport` (or `AsyncDiscoveryTransport`)
+so the client also picks up a new port after the agent restarts.
+
+If the discovery file is missing, requests raise
+`miru_device_sdk.lib.device_api.DiscoveryError`; if the agent doesn't answer,
+`miru_device_sdk.APIConnectionError`.
+
+```python
+client = Miru(agent_transport="tcp")
+```
 
 ## Async usage
 

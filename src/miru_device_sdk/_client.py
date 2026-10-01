@@ -35,6 +35,15 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
+from .lib.device_api import (
+    LOOPBACK_HOST,
+    DiscoveryFile,
+    AgentTransport,
+    DiscoveryTransport,
+    AsyncDiscoveryTransport,
+    discovery_for,
+    resolve_transport,
+)
 
 if TYPE_CHECKING:
     from .resources import agent, device, events, releases, file_rules, deployments, git_commits
@@ -52,30 +61,48 @@ __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Miru", "As
 def _build_sync_httpx_client(
     *,
     socket_path: str,
+    agent_transport: str | None,
+    discovery: DiscoveryFile | None,
     base_url: str | httpx.URL,
     timeout: float | Timeout | None | NotGiven,
 ) -> httpx.Client:
+    transport: httpx.BaseTransport
+    if discovery is not None:
+        transport = DiscoveryTransport(discovery)
+    elif resolve_transport(agent_transport) is AgentTransport.TCP:
+        transport = httpx.HTTPTransport()
+    else:
+        transport = httpx.HTTPTransport(uds=socket_path)
     return httpx.Client(
         base_url=base_url,
         timeout=cast(Timeout, timeout if is_given(timeout) else DEFAULT_TIMEOUT),
         limits=DEFAULT_CONNECTION_LIMITS,
         follow_redirects=True,
-        transport=httpx.HTTPTransport(uds=socket_path),
+        transport=transport,
     )
 
 
 def _build_async_httpx_client(
     *,
     socket_path: str,
+    agent_transport: str | None,
+    discovery: DiscoveryFile | None,
     base_url: str | httpx.URL,
     timeout: float | Timeout | None | NotGiven,
 ) -> httpx.AsyncClient:
+    transport: httpx.AsyncBaseTransport
+    if discovery is not None:
+        transport = AsyncDiscoveryTransport(discovery)
+    elif resolve_transport(agent_transport) is AgentTransport.TCP:
+        transport = httpx.AsyncHTTPTransport()
+    else:
+        transport = httpx.AsyncHTTPTransport(uds=socket_path)
     return httpx.AsyncClient(
         base_url=base_url,
         timeout=cast(Timeout, timeout if is_given(timeout) else DEFAULT_TIMEOUT),
         limits=DEFAULT_CONNECTION_LIMITS,
         follow_redirects=True,
-        transport=httpx.AsyncHTTPTransport(uds=socket_path),
+        transport=transport,
     )
 
 
@@ -136,6 +163,9 @@ class Miru(SyncAPIClient):
             bearer_token = os.environ.get("MIRU_AGENT_TOKEN")
         self.bearer_token = bearer_token
 
+        # Over TCP without a token, the agent's discovery file supplies the port and token.
+        self._discovery = discovery_for(agent_transport, discovery_file, bearer_token)
+
         if base_url is None:
             base_url = os.environ.get("MIRU_BASE_URL")
         if base_url is None:
@@ -143,6 +173,8 @@ class Miru(SyncAPIClient):
         if http_client is None:
             http_client = _build_sync_httpx_client(
                 socket_path=socket_path,
+                agent_transport=agent_transport,
+                discovery=self._discovery,
                 base_url=base_url,
                 timeout=timeout,
             )
@@ -226,9 +258,25 @@ class Miru(SyncAPIClient):
     @override
     def auth_headers(self) -> dict[str, str]:
         bearer_token = self.bearer_token
+        if not bearer_token and self._discovery is not None:
+            bearer_token = self._discovery.get().token
         if bearer_token is None:
             return {}
         return {"Authorization": f"Bearer {bearer_token}"}
+
+    @override
+    def _prepare_url(self, url: str) -> httpx.URL:
+        prepared = super()._prepare_url(url)
+        if self._discovery is None:
+            return prepared
+        return prepared.copy_with(host=LOOPBACK_HOST, port=self._discovery.get().port)
+
+    @override
+    def _should_retry(self, response: httpx.Response) -> bool:
+        # The agent restarted with a new token: retry with the token it now publishes.
+        if response.status_code == 401 and self._discovery is not None:
+            return self._discovery.token_rotated(response)
+        return super()._should_retry(response)
 
     @property
     @override
@@ -387,6 +435,9 @@ class AsyncMiru(AsyncAPIClient):
             bearer_token = os.environ.get("MIRU_AGENT_TOKEN")
         self.bearer_token = bearer_token
 
+        # Over TCP without a token, the agent's discovery file supplies the port and token.
+        self._discovery = discovery_for(agent_transport, discovery_file, bearer_token)
+
         if base_url is None:
             base_url = os.environ.get("MIRU_BASE_URL")
         if base_url is None:
@@ -394,6 +445,8 @@ class AsyncMiru(AsyncAPIClient):
         if http_client is None:
             http_client = _build_async_httpx_client(
                 socket_path=socket_path,
+                agent_transport=agent_transport,
+                discovery=self._discovery,
                 base_url=base_url,
                 timeout=timeout,
             )
@@ -477,9 +530,25 @@ class AsyncMiru(AsyncAPIClient):
     @override
     def auth_headers(self) -> dict[str, str]:
         bearer_token = self.bearer_token
+        if not bearer_token and self._discovery is not None:
+            bearer_token = self._discovery.get().token
         if bearer_token is None:
             return {}
         return {"Authorization": f"Bearer {bearer_token}"}
+
+    @override
+    def _prepare_url(self, url: str) -> httpx.URL:
+        prepared = super()._prepare_url(url)
+        if self._discovery is None:
+            return prepared
+        return prepared.copy_with(host=LOOPBACK_HOST, port=self._discovery.get().port)
+
+    @override
+    def _should_retry(self, response: httpx.Response) -> bool:
+        # The agent restarted with a new token: retry with the token it now publishes.
+        if response.status_code == 401 and self._discovery is not None:
+            return self._discovery.token_rotated(response)
+        return super()._should_retry(response)
 
     @property
     @override
