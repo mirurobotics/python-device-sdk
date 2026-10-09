@@ -34,7 +34,7 @@ class Deployment(BaseModel):
     """
 
     created_at: datetime
-    """Timestamp of when the device release was created."""
+    """Timestamp of when the deployment was created."""
 
     description: str
     """The description of the deployment."""
