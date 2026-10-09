@@ -1,5 +1,39 @@
 # Changelog
 
+## [0.7.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.6.0...v0.7.0) (2026-10-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deployments:** rename deployed_by to queued_by and add derived staged_by ([#316](https://github.com/mirurobotics/python-device-sdk/issues/316))
+* **frontend:** remove release migrate endpoint ([#310](https://github.com/mirurobotics/python-device-sdk/issues/310))
+
+### Features
+
+* **cli:** add POST /config_schemas/validate dry-run endpoint ([#242](https://github.com/mirurobotics/python-device-sdk/issues/242)) ([926c448](https://github.com/mirurobotics/python-device-sdk/commit/926c448ff93c0926ce8f75114fc88138b97d577b))
+* **client:** reach the agent over loopback TCP with its discovery file ([#3](https://github.com/mirurobotics/python-device-sdk/issues/3)) ([c620e55](https://github.com/mirurobotics/python-device-sdk/commit/c620e55244401a59f77a9d20beba2e6875dea7c2))
+* **configs:** Windows file rule globs and read-only os fields ([#293](https://github.com/mirurobotics/python-device-sdk/issues/293)) ([542e06f](https://github.com/mirurobotics/python-device-sdk/commit/542e06fe790523dd2fa3b485e83185ef71f94d2f))
+* **deployments:** rename deployed_by to queued_by and add derived staged_by ([#316](https://github.com/mirurobotics/python-device-sdk/issues/316)) ([1855452](https://github.com/mirurobotics/python-device-sdk/commit/1855452923ceb646e23c57d66aa8f490668fd364))
+* **device:** add file_rule_ids to releases and GET /file_rules/{file_rule_id} ([#291](https://github.com/mirurobotics/python-device-sdk/issues/291)) ([c1555c7](https://github.com/mirurobotics/python-device-sdk/commit/c1555c7a471c50ec7f6940c9e8e030c8f7b92e89))
+* **device:** bearer auth and SDK client options for the agent's loopback TCP API ([#302](https://github.com/mirurobotics/python-device-sdk/issues/302)) ([63afc05](https://github.com/mirurobotics/python-device-sdk/commit/63afc057977b07f85427fde82e25172d84e4b3c6))
+
+
+### Bug Fixes
+
+* **stlc:** make generate CI install work on Blacksmith (ssh-auth + npm cache) ([#147](https://github.com/mirurobotics/python-device-sdk/issues/147)) ([1cae83b](https://github.com/mirurobotics/python-device-sdk/commit/1cae83b20a90a3592a061bff2af4d56c9feb48af))
+
+
+### Chores
+
+* regenerate SDK from openapi config ([85afd61](https://github.com/mirurobotics/python-device-sdk/commit/85afd6104f6f2084a10f70e79f57d3b6bc392a78))
+* **sdkgen:** repin stlc-python at a7fb576, set python floor &gt;= 3.10 ([#285](https://github.com/mirurobotics/python-device-sdk/issues/285)) ([d202ddf](https://github.com/mirurobotics/python-device-sdk/commit/d202ddf2e1dd8c333666f4d64a3fdb09d7ae525b))
+* **sdkgen:** repin stlc-python to surgical re-lock (570bf02) ([#287](https://github.com/mirurobotics/python-device-sdk/issues/287)) ([8218315](https://github.com/mirurobotics/python-device-sdk/commit/8218315a114d40ab2e1d7f06307ffdeb8ecfeb84))
+
+
+### Refactors
+
+* **frontend:** remove release migrate endpoint ([#310](https://github.com/mirurobotics/python-device-sdk/issues/310)) ([e90cffa](https://github.com/mirurobotics/python-device-sdk/commit/e90cffa1c20228c00f6cc6dbccaea0196582f34a))
+
 ## 0.6.0 (2026-05-13)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.5.0...v0.6.0)
