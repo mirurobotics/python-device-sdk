@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -11,11 +11,15 @@ __all__ = ["FileRule", "Source", "Retention", "Upload"]
 
 class Source(BaseModel):
     glob: str
-    """A glob pattern selecting the files this rule manages.
-
-    Must be absolute (start with `/` on Linux, or a drive letter followed by `:\\`` or
-    `:/` on Windows, e.g. `C:\\llogs\\**.log`), at most 1024 bytes, and must contain no
-    `..` segments and no empty path segments.
+    """
+    Absolute glob of the files this rule manages (`/` on Linux, `C:\\……` or `C:/…` on
+    Windows; max 1024 bytes; no `.`, `..` or empty segments). A `{name}` capture
+    matches like `*` within one segment and must be used in `upload.bundle` or
+    `upload.path`. Names match `[a-z][a-z0-9_]*`, are unique, and must not reuse a
+    built-in path variable. A segment holds at most one capture, and the rest of
+    that segment must be constant text (no `*`, `?`, `[`, `\\`` or other braces). A
+    capture may not have `**` segments both before and after it. `{a,b}` is literal.
+    Devices see each capture as `*`.
     """
 
     stability_window_secs: int
@@ -76,13 +80,16 @@ class Upload(BaseModel):
     """Name of the bucket this rule uploads to."""
 
     path: str
-    """The object-path template the collected file is written to.
+    """Object-path template for the uploaded file.
 
-    Must contain `{upload_id}` so every upload lands on a distinct object key, be at
-    most 1024 bytes, have balanced braces, and contain no `..` segments and no empty
-    path segments. The supported variables are `{device_id}`, `{device_name}`,
-    `{file_name}`, `{upload_id}`, `{year}`, `{month}`, `{day}`, `{hour}`, and
-    `{minute}`.
+    Contains `{upload_id}`, is at most 1024 bytes, has balanced braces, and contains
+    no `..` or empty segments. Variables: `{device_id}`, `{device_name}`,
+    `{file_name}`, `{upload_id}`, `{bundle_id}`, `{year}`, `{month}`, `{day}`,
+    `{hour}`, `{minute}`, `{timezone}`, plus any `source.glob` capture.
+    `{bundle_id}` requires `bundle`. The time variables are zero-padded and rendered
+    from the file's mtime (its last-modified time, from the device clock) in
+    `timezone`; `{timezone}` is that instant's UTC offset in ISO 8601 basic format
+    (`+0000`, `-0500`).
     """
 
     upload_collection_id: str
@@ -90,6 +97,30 @@ class Upload(BaseModel):
 
     upload_collection_name: str
     """The name of the upload collection the resulting uploads are grouped into."""
+
+    bundle: Optional[List[str]] = None
+    """
+    Names of the `source.glob` captures whose values group the rule's uploads into
+    bundles: uploads from the same device and upload collection that captured the
+    same values, in the order listed, share a bundle, across rules and over time.
+    Capture names don't affect matching, so rules that name their captures
+    differently still share a bundle when they list them in the same order. Every
+    name must be a `source.glob` capture, listed once, with at most 16 names. Absent
+    when the rule does not bundle.
+    """
+
+    timezone: Optional[Literal["utc", "device"]] = None
+    """
+    The time zone a file rule renders its upload path's time variables (`{year}`,
+    `{month}`, `{day}`, `{hour}`, `{minute}` and `{timezone}`) in.
+
+    - `utc`: Coordinated Universal Time.
+    - `device`: the device's local time zone, as the agent resolves it from the `TZ`
+      environment variable or, when `TZ` is unset, the system time zone
+      (`/etc/localtime` on Linux). The UTC offset is taken at the rendered instant,
+      so it follows daylight saving time. A device running an agent that does not
+      report its UTC offset renders in UTC.
+    """
 
 
 class FileRule(BaseModel):

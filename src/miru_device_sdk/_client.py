@@ -46,7 +46,7 @@ from .lib.device_api import (
 )
 
 if TYPE_CHECKING:
-    from .resources import agent, device, events, releases, file_rules, deployments, git_commits
+    from .resources import agent, device, events, releases, file_rules, deployments, git_commits, calibrations
     from .resources.agent import AgentResource, AsyncAgentResource
     from .resources.device import DeviceResource, AsyncDeviceResource
     from .resources.events import EventsResource, AsyncEventsResource
@@ -54,6 +54,7 @@ if TYPE_CHECKING:
     from .resources.file_rules import FileRulesResource, AsyncFileRulesResource
     from .resources.deployments import DeploymentsResource, AsyncDeploymentsResource
     from .resources.git_commits import GitCommitsResource, AsyncGitCommitsResource
+    from .resources.calibrations import CalibrationsResource, AsyncCalibrationsResource
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Miru", "AsyncMiru", "Client", "AsyncClient"]
 
@@ -204,6 +205,12 @@ class Miru(SyncAPIClient):
         from .resources.agent import AgentResource
 
         return AgentResource(self)
+
+    @cached_property
+    def calibrations(self) -> CalibrationsResource:
+        from .resources.calibrations import CalibrationsResource
+
+        return CalibrationsResource(self)
 
     @cached_property
     def deployments(self) -> DeploymentsResource:
@@ -478,6 +485,12 @@ class AsyncMiru(AsyncAPIClient):
         return AsyncAgentResource(self)
 
     @cached_property
+    def calibrations(self) -> AsyncCalibrationsResource:
+        from .resources.calibrations import AsyncCalibrationsResource
+
+        return AsyncCalibrationsResource(self)
+
+    @cached_property
     def deployments(self) -> AsyncDeploymentsResource:
         from .resources.deployments import AsyncDeploymentsResource
 
@@ -663,6 +676,12 @@ class MiruWithRawResponse:
         return AgentResourceWithRawResponse(self._client.agent)
 
     @cached_property
+    def calibrations(self) -> calibrations.CalibrationsResourceWithRawResponse:
+        from .resources.calibrations import CalibrationsResourceWithRawResponse
+
+        return CalibrationsResourceWithRawResponse(self._client.calibrations)
+
+    @cached_property
     def deployments(self) -> deployments.DeploymentsResourceWithRawResponse:
         from .resources.deployments import DeploymentsResourceWithRawResponse
 
@@ -710,6 +729,12 @@ class AsyncMiruWithRawResponse:
         from .resources.agent import AsyncAgentResourceWithRawResponse
 
         return AsyncAgentResourceWithRawResponse(self._client.agent)
+
+    @cached_property
+    def calibrations(self) -> calibrations.AsyncCalibrationsResourceWithRawResponse:
+        from .resources.calibrations import AsyncCalibrationsResourceWithRawResponse
+
+        return AsyncCalibrationsResourceWithRawResponse(self._client.calibrations)
 
     @cached_property
     def deployments(self) -> deployments.AsyncDeploymentsResourceWithRawResponse:
@@ -761,6 +786,12 @@ class MiruWithStreamedResponse:
         return AgentResourceWithStreamingResponse(self._client.agent)
 
     @cached_property
+    def calibrations(self) -> calibrations.CalibrationsResourceWithStreamingResponse:
+        from .resources.calibrations import CalibrationsResourceWithStreamingResponse
+
+        return CalibrationsResourceWithStreamingResponse(self._client.calibrations)
+
+    @cached_property
     def deployments(self) -> deployments.DeploymentsResourceWithStreamingResponse:
         from .resources.deployments import DeploymentsResourceWithStreamingResponse
 
@@ -808,6 +839,12 @@ class AsyncMiruWithStreamedResponse:
         from .resources.agent import AsyncAgentResourceWithStreamingResponse
 
         return AsyncAgentResourceWithStreamingResponse(self._client.agent)
+
+    @cached_property
+    def calibrations(self) -> calibrations.AsyncCalibrationsResourceWithStreamingResponse:
+        from .resources.calibrations import AsyncCalibrationsResourceWithStreamingResponse
+
+        return AsyncCalibrationsResourceWithStreamingResponse(self._client.calibrations)
 
     @cached_property
     def deployments(self) -> deployments.AsyncDeploymentsResourceWithStreamingResponse:

@@ -11,6 +11,18 @@ Methods:
 - <code title="get /health">client.agent.<a href="./src/miru_device_sdk/resources/agent.py">health</a>() -> <a href="./src/miru_device_sdk/types/agent_health_response.py">AgentHealthResponse</a></code>
 - <code title="get /version">client.agent.<a href="./src/miru_device_sdk/resources/agent.py">version</a>() -> <a href="./src/miru_device_sdk/types/agent_version_response.py">AgentVersionResponse</a></code>
 
+# Calibrations
+
+Types:
+
+```python
+from miru_device_sdk.types import CalibrationCreateResponse
+```
+
+Methods:
+
+- <code title="post /calibrations">client.calibrations.<a href="./src/miru_device_sdk/resources/calibrations.py">create</a>(\*\*<a href="src/miru_device_sdk/types/calibration_create_params.py">params</a>) -> <a href="./src/miru_device_sdk/types/calibration_create_response.py">CalibrationCreateResponse</a></code>
+
 # Deployments
 
 Types:
