@@ -92,6 +92,19 @@ class Upload(BaseModel):
     (`+0000`, `-0500`).
     """
 
+    timezone: Literal["utc", "device"]
+    """
+    The time zone a file rule renders its upload path's time variables (`{year}`,
+    `{month}`, `{day}`, `{hour}`, `{minute}` and `{timezone}`) in.
+
+    - `utc`: Coordinated Universal Time.
+    - `device`: the device's local time zone, as the agent resolves it from the `TZ`
+      environment variable or, when `TZ` is unset, the system time zone
+      (`/etc/localtime` on Linux). The UTC offset is taken at the rendered instant,
+      so it follows daylight saving time. A device running an agent that does not
+      report its UTC offset renders in UTC.
+    """
+
     upload_collection_id: str
     """ID of the upload collection the resulting uploads are grouped into."""
 
@@ -107,19 +120,6 @@ class Upload(BaseModel):
     differently still share a bundle when they list them in the same order. Every
     name must be a `source.glob` capture, listed once, with at most 16 names. Absent
     when the rule does not bundle.
-    """
-
-    timezone: Optional[Literal["utc", "device"]] = None
-    """
-    The time zone a file rule renders its upload path's time variables (`{year}`,
-    `{month}`, `{day}`, `{hour}`, `{minute}` and `{timezone}`) in.
-
-    - `utc`: Coordinated Universal Time.
-    - `device`: the device's local time zone, as the agent resolves it from the `TZ`
-      environment variable or, when `TZ` is unset, the system time zone
-      (`/etc/localtime` on Linux). The UTC offset is taken at the rendered instant,
-      so it follows daylight saving time. A device running an agent that does not
-      report its UTC offset renders in UTC.
     """
 
 
