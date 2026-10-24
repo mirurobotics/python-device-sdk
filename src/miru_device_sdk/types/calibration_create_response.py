@@ -8,6 +8,13 @@ __all__ = ["CalibrationCreateResponse"]
 
 
 class CalibrationCreateResponse(BaseModel):
+    report_id: str
+    """ID the agent gave this report.
+
+    The agent sends it to Miru with the calibration, and Miru stores it as the
+    calibration's `report_id`.
+    """
+
     reported_at: datetime
     """Timestamp of when the agent received the calibration.
 

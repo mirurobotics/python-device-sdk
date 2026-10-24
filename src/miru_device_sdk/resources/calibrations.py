@@ -67,9 +67,8 @@ class CalibrationsResource(SyncAPIResource):
         workspace holds 100, is set aside on the device and does not hold up later ones.
         Content is at most 1 MiB and a request is at most about 2 MiB (1 MiB of content
         plus JSON escaping). Each request is a new calibration, so sending the same
-        calibration twice records it twice. If the agent loses Miru's response to an
-        upload, for example to a timeout or a restart, it uploads the calibration again,
-        so on rare occasions Miru records one twice.
+        calibration twice records it twice. The agent sends the report's `report_id`
+        with every upload, so a retried upload does not record the calibration twice.
 
         Args:
           component_slug: Slug of the component the calibrated unit belongs to. A new slug creates a
@@ -164,9 +163,8 @@ class AsyncCalibrationsResource(AsyncAPIResource):
         workspace holds 100, is set aside on the device and does not hold up later ones.
         Content is at most 1 MiB and a request is at most about 2 MiB (1 MiB of content
         plus JSON escaping). Each request is a new calibration, so sending the same
-        calibration twice records it twice. If the agent loses Miru's response to an
-        upload, for example to a timeout or a restart, it uploads the calibration again,
-        so on rare occasions Miru records one twice.
+        calibration twice records it twice. The agent sends the report's `report_id`
+        with every upload, so a retried upload does not record the calibration twice.
 
         Args:
           component_slug: Slug of the component the calibrated unit belongs to. A new slug creates a
