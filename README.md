@@ -134,7 +134,7 @@ from miru_device_sdk import Miru
 client = Miru()
 
 calibration = client.calibrations.create(
-    component_slug="arm",
+    component="arm",
     content={
         "data": '{\n  "enable_autonomy": true,\n  "enable_remote_control": true,\n  "max_payload_kg": 10.0\n}\n',
         "format": "json",

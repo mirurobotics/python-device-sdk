@@ -21,7 +21,7 @@ class TestCalibrations:
     @parametrize
     def test_method_create(self, client: Miru) -> None:
         calibration = client.calibrations.create(
-            component_slug="arm",
+            component="arm",
             content={
                 "data": '{\n  "enable_autonomy": true,\n  "enable_remote_control": true,\n  "max_payload_kg": 10.0\n}\n',
                 "format": "json",
@@ -33,7 +33,7 @@ class TestCalibrations:
     @parametrize
     def test_method_create_with_all_params(self, client: Miru) -> None:
         calibration = client.calibrations.create(
-            component_slug="arm",
+            component="arm",
             content={
                 "data": '{\n  "enable_autonomy": true,\n  "enable_remote_control": true,\n  "max_payload_kg": 10.0\n}\n',
                 "format": "json",
@@ -48,7 +48,7 @@ class TestCalibrations:
     @parametrize
     def test_raw_response_create(self, client: Miru) -> None:
         response = client.calibrations.with_raw_response.create(
-            component_slug="arm",
+            component="arm",
             content={
                 "data": '{\n  "enable_autonomy": true,\n  "enable_remote_control": true,\n  "max_payload_kg": 10.0\n}\n',
                 "format": "json",
@@ -64,7 +64,7 @@ class TestCalibrations:
     @parametrize
     def test_streaming_response_create(self, client: Miru) -> None:
         with client.calibrations.with_streaming_response.create(
-            component_slug="arm",
+            component="arm",
             content={
                 "data": '{\n  "enable_autonomy": true,\n  "enable_remote_control": true,\n  "max_payload_kg": 10.0\n}\n',
                 "format": "json",
@@ -88,7 +88,7 @@ class TestAsyncCalibrations:
     @parametrize
     async def test_method_create(self, async_client: AsyncMiru) -> None:
         calibration = await async_client.calibrations.create(
-            component_slug="arm",
+            component="arm",
             content={
                 "data": '{\n  "enable_autonomy": true,\n  "enable_remote_control": true,\n  "max_payload_kg": 10.0\n}\n',
                 "format": "json",
@@ -100,7 +100,7 @@ class TestAsyncCalibrations:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncMiru) -> None:
         calibration = await async_client.calibrations.create(
-            component_slug="arm",
+            component="arm",
             content={
                 "data": '{\n  "enable_autonomy": true,\n  "enable_remote_control": true,\n  "max_payload_kg": 10.0\n}\n',
                 "format": "json",
@@ -115,7 +115,7 @@ class TestAsyncCalibrations:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncMiru) -> None:
         response = await async_client.calibrations.with_raw_response.create(
-            component_slug="arm",
+            component="arm",
             content={
                 "data": '{\n  "enable_autonomy": true,\n  "enable_remote_control": true,\n  "max_payload_kg": 10.0\n}\n',
                 "format": "json",
@@ -131,7 +131,7 @@ class TestAsyncCalibrations:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncMiru) -> None:
         async with async_client.calibrations.with_streaming_response.create(
-            component_slug="arm",
+            component="arm",
             content={
                 "data": '{\n  "enable_autonomy": true,\n  "enable_remote_control": true,\n  "max_payload_kg": 10.0\n}\n',
                 "format": "json",

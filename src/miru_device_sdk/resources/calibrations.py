@@ -44,7 +44,7 @@ class CalibrationsResource(SyncAPIResource):
     def create(
         self,
         *,
-        component_slug: str,
+        component: str,
         content: calibration_create_params.Content,
         aspect: str | Omit = omit,
         role: str | Omit = omit,
@@ -60,8 +60,9 @@ class CalibrationsResource(SyncAPIResource):
         Report a calibration to Miru.
 
         Args:
-          component_slug: Slug of the component the calibrated unit belongs to. A new slug creates a
-              component in Miru.
+          component: Slug of the component the calibrated unit belongs to, such as `arm`. Miru
+              resolves it to the component, creating the component the first time it is
+              reported.
 
           content: The calibration's content, at most 1 MiB. The agent uploads it to Miru
               unchanged.
@@ -91,7 +92,7 @@ class CalibrationsResource(SyncAPIResource):
             "/calibrations",
             body=maybe_transform(
                 {
-                    "component_slug": component_slug,
+                    "component": component,
                     "content": content,
                     "aspect": aspect,
                     "role": role,
@@ -129,7 +130,7 @@ class AsyncCalibrationsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        component_slug: str,
+        component: str,
         content: calibration_create_params.Content,
         aspect: str | Omit = omit,
         role: str | Omit = omit,
@@ -145,8 +146,9 @@ class AsyncCalibrationsResource(AsyncAPIResource):
         Report a calibration to Miru.
 
         Args:
-          component_slug: Slug of the component the calibrated unit belongs to. A new slug creates a
-              component in Miru.
+          component: Slug of the component the calibrated unit belongs to, such as `arm`. Miru
+              resolves it to the component, creating the component the first time it is
+              reported.
 
           content: The calibration's content, at most 1 MiB. The agent uploads it to Miru
               unchanged.
@@ -176,7 +178,7 @@ class AsyncCalibrationsResource(AsyncAPIResource):
             "/calibrations",
             body=await async_maybe_transform(
                 {
-                    "component_slug": component_slug,
+                    "component": component,
                     "content": content,
                     "aspect": aspect,
                     "role": role,

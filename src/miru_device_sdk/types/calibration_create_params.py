@@ -8,10 +8,11 @@ __all__ = ["CalibrationCreateParams", "Content"]
 
 
 class CalibrationCreateParams(TypedDict, total=False):
-    component_slug: Required[str]
-    """Slug of the component the calibrated unit belongs to.
+    component: Required[str]
+    """Slug of the component the calibrated unit belongs to, such as `arm`.
 
-    A new slug creates a component in Miru.
+    Miru resolves it to the component, creating the component the first time it is
+    reported.
     """
 
     content: Required[Content]
