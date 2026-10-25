@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.8.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.7.0...v0.8.0) (2026-10-25)
+
+
+### Features
+
+* **calibrations:** report_id on calibration reports ([#352](https://github.com/mirurobotics/python-device-sdk/issues/352)) ([9124d75](https://github.com/mirurobotics/python-device-sdk/commit/9124d7568a781f6755220dfe23be590548d8eb42))
+* **file-rules:** require upload.timezone in file rule responses ([#347](https://github.com/mirurobotics/python-device-sdk/issues/347)) ([c78bed8](https://github.com/mirurobotics/python-device-sdk/commit/c78bed83bb90192ffc44cea5abd840bbe2d87532))
+
+
+### Chores
+
+* regenerate SDK from openapi config ([cd66d4b](https://github.com/mirurobotics/python-device-sdk/commit/cd66d4b8691bf2343b86405db7fc89ae0cf9bba7))
+
 ## [0.7.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.6.0...v0.7.0) (2026-10-09)
 
 
