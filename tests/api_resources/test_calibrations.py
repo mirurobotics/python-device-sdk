@@ -39,8 +39,8 @@ class TestCalibrations:
                 "format": "json",
             },
             aspect="pose",
-            role="aligner-1",
-            serial_number="M500-1234",
+            role="front-left",
+            serial_number="SN-1234",
         )
         assert_matches_type(CalibrationCreateResponse, calibration, path=["response"])
 
@@ -106,8 +106,8 @@ class TestAsyncCalibrations:
                 "format": "json",
             },
             aspect="pose",
-            role="aligner-1",
-            serial_number="M500-1234",
+            role="front-left",
+            serial_number="SN-1234",
         )
         assert_matches_type(CalibrationCreateResponse, calibration, path=["response"])
 

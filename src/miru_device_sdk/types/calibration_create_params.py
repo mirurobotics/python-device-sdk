@@ -24,14 +24,14 @@ class CalibrationCreateParams(TypedDict, total=False):
     aspect: str
     """
     Slug of the aspect of the unit that was calibrated, when it has more than one,
-    e.g. `intrinsics` vs `extrinsics`, or `pose` vs `home-offsets`. Validated like a
-    slug. Miru resolves it to one of the component's `aspects`, creating the aspect
-    the first time it is reported.
+    e.g. `intrinsics` vs `extrinsics`, or `pose` vs `joint-offsets`. Validated like
+    a slug. Miru resolves it to one of the component's `aspects`, creating the
+    aspect the first time it is reported.
     """
 
     role: str
     """
-    Slug of the role the calibrated unit fills on the device, such as `aligner-1` or
+    Slug of the role the calibrated unit fills on the device, such as `left` or
     `front-left`. Distinguishes several units of one component on a device.
     Validated like a slug. Miru resolves it to one of the component's `roles`,
     creating the role the first time it is reported.
@@ -40,7 +40,7 @@ class CalibrationCreateParams(TypedDict, total=False):
     serial_number: str
     """
     Serial number of the physical unit that was calibrated, not of the device, such
-    as `M500-1234`. Free text, at most 255 characters.
+    as `SN-1234`. Free text, at most 255 characters.
     """
 
 
