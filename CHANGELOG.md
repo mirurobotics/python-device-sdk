@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/mirurobotics/python-device-sdk/compare/v0.8.0...v0.8.1) (2026-10-26)
+
+
+### Chores
+
+* merge production main (release 0.8.0) into staging ([f1d97c9](https://github.com/mirurobotics/python-device-sdk/commit/f1d97c9e7c54770fead978fa8809b96e70c0c5de))
+
 ## [0.8.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.7.0...v0.8.0) (2026-10-25)
 
 
