@@ -47,6 +47,7 @@ class CalibrationsResource(SyncAPIResource):
         component: str,
         content: calibration_create_params.Content,
         aspect: str | Omit = omit,
+        reported_by: str | Omit = omit,
         role: str | Omit = omit,
         serial_number: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -72,6 +73,9 @@ class CalibrationsResource(SyncAPIResource):
               a slug. Miru resolves it to one of the component's `aspects`, creating the
               aspect the first time it is reported.
 
+          reported_by: Who reported the calibration, as the device knows them, such as
+              `Benjamin Smidt`. Free text, at most 255 characters. Miru stores it unchanged.
+
           role: Slug of the role the calibrated unit fills on the device, such as `left` or
               `front-left`. Distinguishes several units of one component on a device.
               Validated like a slug. Miru resolves it to one of the component's `roles`,
@@ -95,6 +99,7 @@ class CalibrationsResource(SyncAPIResource):
                     "component": component,
                     "content": content,
                     "aspect": aspect,
+                    "reported_by": reported_by,
                     "role": role,
                     "serial_number": serial_number,
                 },
@@ -133,6 +138,7 @@ class AsyncCalibrationsResource(AsyncAPIResource):
         component: str,
         content: calibration_create_params.Content,
         aspect: str | Omit = omit,
+        reported_by: str | Omit = omit,
         role: str | Omit = omit,
         serial_number: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -158,6 +164,9 @@ class AsyncCalibrationsResource(AsyncAPIResource):
               a slug. Miru resolves it to one of the component's `aspects`, creating the
               aspect the first time it is reported.
 
+          reported_by: Who reported the calibration, as the device knows them, such as
+              `Benjamin Smidt`. Free text, at most 255 characters. Miru stores it unchanged.
+
           role: Slug of the role the calibrated unit fills on the device, such as `left` or
               `front-left`. Distinguishes several units of one component on a device.
               Validated like a slug. Miru resolves it to one of the component's `roles`,
@@ -181,6 +190,7 @@ class AsyncCalibrationsResource(AsyncAPIResource):
                     "component": component,
                     "content": content,
                     "aspect": aspect,
+                    "reported_by": reported_by,
                     "role": role,
                     "serial_number": serial_number,
                 },

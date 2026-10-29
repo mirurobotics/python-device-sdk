@@ -39,6 +39,7 @@ class TestCalibrations:
                 "format": "json",
             },
             aspect="pose",
+            reported_by="Benjamin Smidt",
             role="front-left",
             serial_number="SN-1234",
         )
@@ -106,6 +107,7 @@ class TestAsyncCalibrations:
                 "format": "json",
             },
             aspect="pose",
+            reported_by="Benjamin Smidt",
             role="front-left",
             serial_number="SN-1234",
         )

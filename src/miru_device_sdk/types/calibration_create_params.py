@@ -29,6 +29,13 @@ class CalibrationCreateParams(TypedDict, total=False):
     aspect the first time it is reported.
     """
 
+    reported_by: str
+    """Who reported the calibration, as the device knows them, such as
+    `Benjamin Smidt`.
+
+    Free text, at most 255 characters. Miru stores it unchanged.
+    """
+
     role: str
     """
     Slug of the role the calibrated unit fills on the device, such as `left` or
@@ -53,7 +60,7 @@ class Content(TypedDict, total=False):
     data: Required[str]
     """The content's values, serialized in `format`."""
 
-    format: Required[Literal["json", "yaml", "jsonc", "xml", "text"]]
+    format: Required[Literal["json", "yaml", "jsonc", "xml", "csv", "text"]]
     """The serialization format of config content.
 
     A config instance is written to the device filesystem in this format.
@@ -62,5 +69,6 @@ class Content(TypedDict, total=False):
     - `yaml`: YAML 1.2.
     - `jsonc`: JSON with comments (JSON plus `//` and `/* */` comment syntax).
     - `xml`: XML.
+    - `csv`: comma-separated values (RFC 4180).
     - `text`: plain, unstructured text with no specific format.
     """
