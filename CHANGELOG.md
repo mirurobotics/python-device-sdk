@@ -1,16 +1,16 @@
 # Changelog
 
-## [0.8.2](https://github.com/mirurobotics/python-device-sdk/compare/v0.8.1...v0.8.2) (2026-10-29)
+## [0.9.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.8.1...v0.9.0) (2026-10-29)
 
 
-### Chores
+### Features
 
-* regenerate SDK from openapi config ([0577b7c](https://github.com/mirurobotics/python-device-sdk/commit/0577b7c94108806490911cf22e19bf0c4f686ad8))
+* **calibrations:** reported_by on calibration reports ([0577b7c](https://github.com/mirurobotics/python-device-sdk/commit/0577b7c94108806490911cf22e19bf0c4f686ad8))
 
 ## [0.8.1](https://github.com/mirurobotics/python-device-sdk/compare/v0.8.0...v0.8.1) (2026-10-26)
 
 
-### Chores
+### Features
 
 * merge production main (release 0.8.0) into staging ([f1d97c9](https://github.com/mirurobotics/python-device-sdk/commit/f1d97c9e7c54770fead978fa8809b96e70c0c5de))
 
@@ -23,9 +23,9 @@
 * **file-rules:** require upload.timezone in file rule responses ([#347](https://github.com/mirurobotics/python-device-sdk/issues/347)) ([c78bed8](https://github.com/mirurobotics/python-device-sdk/commit/c78bed83bb90192ffc44cea5abd840bbe2d87532))
 
 
-### Chores
+### Features
 
-* regenerate SDK from openapi config ([cd66d4b](https://github.com/mirurobotics/python-device-sdk/commit/cd66d4b8691bf2343b86405db7fc89ae0cf9bba7))
+* **calibrations:** reported_by on calibration reports ([cd66d4b](https://github.com/mirurobotics/python-device-sdk/commit/cd66d4b8691bf2343b86405db7fc89ae0cf9bba7))
 
 ## [0.7.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.6.0...v0.7.0) (2026-10-09)
 
@@ -50,9 +50,9 @@
 * **stlc:** make generate CI install work on Blacksmith (ssh-auth + npm cache) ([#147](https://github.com/mirurobotics/python-device-sdk/issues/147)) ([1cae83b](https://github.com/mirurobotics/python-device-sdk/commit/1cae83b20a90a3592a061bff2af4d56c9feb48af))
 
 
-### Chores
+### Features
 
-* regenerate SDK from openapi config ([85afd61](https://github.com/mirurobotics/python-device-sdk/commit/85afd6104f6f2084a10f70e79f57d3b6bc392a78))
+* **calibrations:** reported_by on calibration reports ([85afd61](https://github.com/mirurobotics/python-device-sdk/commit/85afd6104f6f2084a10f70e79f57d3b6bc392a78))
 * **sdkgen:** repin stlc-python at a7fb576, set python floor &gt;= 3.10 ([#285](https://github.com/mirurobotics/python-device-sdk/issues/285)) ([d202ddf](https://github.com/mirurobotics/python-device-sdk/commit/d202ddf2e1dd8c333666f4d64a3fdb09d7ae525b))
 * **sdkgen:** repin stlc-python to surgical re-lock (570bf02) ([#287](https://github.com/mirurobotics/python-device-sdk/issues/287)) ([8218315](https://github.com/mirurobotics/python-device-sdk/commit/8218315a114d40ab2e1d7f06307ffdeb8ecfeb84))
 
@@ -75,7 +75,7 @@ Full Changelog: [v0.5.0...v0.6.0](https://github.com/mirurobotics/python-device-
 * **client:** add missing f-string prefix in file type error message ([c2a3082](https://github.com/mirurobotics/python-device-sdk/commit/c2a3082060589bd138f23d238c49f18fcbb507fe))
 
 
-### Chores
+### Features
 
 * **internal:** reformat pyproject.toml ([0b1f068](https://github.com/mirurobotics/python-device-sdk/commit/0b1f0687b6a70d6628bec935d6db08fc0d08a63d))
 
@@ -93,7 +93,7 @@ Full Changelog: [v0.4.2...v0.5.0](https://github.com/mirurobotics/python-device-
 * use correct field name format for multipart file arrays ([6a12b31](https://github.com/mirurobotics/python-device-sdk/commit/6a12b315a3abaf3047c46378a152533aefc28fed))
 
 
-### Chores
+### Features
 
 * **internal:** more robust bootstrap script ([c35b72a](https://github.com/mirurobotics/python-device-sdk/commit/c35b72ad6ba2abfdbdf8a0f39701f27ccf8e73bb))
 
@@ -138,7 +138,7 @@ Full Changelog: [v0.3.0...v0.4.0-beta.1](https://github.com/mirurobotics/python-
 * sanitize endpoint path params ([757293e](https://github.com/mirurobotics/python-device-sdk/commit/757293ec4220d42156d996cf24b47a4118fdfd77))
 
 
-### Chores
+### Features
 
 * **ci:** skip lint on metadata-only changes ([4f76a08](https://github.com/mirurobotics/python-device-sdk/commit/4f76a088c4fd75483e252ff09d9e3e14e33f938b))
 * **internal:** tweak CI branches ([c197558](https://github.com/mirurobotics/python-device-sdk/commit/c1975584103308b7e1e2ee909a73a83e456c5002))
@@ -160,7 +160,7 @@ Full Changelog: [v0.3.0-beta.3...v0.3.0](https://github.com/mirurobotics/python-
 * **api:** bump api spec to version v0.2.0 ([a86a5eb](https://github.com/mirurobotics/python-device-sdk/commit/a86a5eb2d0e938d0d6909e68e0a5003157164e4e))
 
 
-### Chores
+### Features
 
 * **ci:** skip uploading artifacts on stainless-internal branches ([ac4ece9](https://github.com/mirurobotics/python-device-sdk/commit/ac4ece9a21bd48827186134e590c45547a9ad5a4))
 
@@ -173,7 +173,7 @@ Full Changelog: [v0.3.0-beta.2...v0.3.0-beta.3](https://github.com/mirurobotics/
 * remove config instances from being nested inside deployments ([cd35a12](https://github.com/mirurobotics/python-device-sdk/commit/cd35a122583d74cef41db66a63ac42a29d9d8742))
 
 
-### Chores
+### Features
 
 * update SDK settings ([bc7d9a1](https://github.com/mirurobotics/python-device-sdk/commit/bc7d9a1ea6fe3274804ca7f03f8b61770c201d05))
 * update SDK settings ([10d3ea5](https://github.com/mirurobotics/python-device-sdk/commit/10d3ea5b22ec6f735e602f1c94e068a575b31152))
@@ -206,7 +206,7 @@ Full Changelog: [v0.0.1...v0.3.0-beta.1](https://github.com/mirurobotics/python-
 * host to point to correct localhost v0.2 version ([214fe96](https://github.com/mirurobotics/python-device-sdk/commit/214fe96ed48a8f5da3d09b7773cfe2c12bb4d033))
 
 
-### Chores
+### Features
 
 * pin sdk to 2025-11-20 ([da48345](https://github.com/mirurobotics/python-device-sdk/commit/da483456ff2ce81b72b30b30311baf29e998ee1a))
 * update SDK settings ([b8d224b](https://github.com/mirurobotics/python-device-sdk/commit/b8d224b9b9a1ba344780c2044c1402f38d10b016))
