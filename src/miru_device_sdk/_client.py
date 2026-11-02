@@ -46,12 +46,13 @@ from .lib.device_api import (
 )
 
 if TYPE_CHECKING:
-    from .resources import agent, device, events, releases, file_rules, deployments, git_commits, calibrations
+    from .resources import agent, cloud, device, events, releases, file_rules, deployments, git_commits, calibrations
     from .resources.agent import AgentResource, AsyncAgentResource
     from .resources.device import DeviceResource, AsyncDeviceResource
     from .resources.events import EventsResource, AsyncEventsResource
     from .resources.releases import ReleasesResource, AsyncReleasesResource
     from .resources.file_rules import FileRulesResource, AsyncFileRulesResource
+    from .resources.cloud.cloud import CloudResource, AsyncCloudResource
     from .resources.deployments import DeploymentsResource, AsyncDeploymentsResource
     from .resources.git_commits import GitCommitsResource, AsyncGitCommitsResource
     from .resources.calibrations import CalibrationsResource, AsyncCalibrationsResource
@@ -247,6 +248,12 @@ class Miru(SyncAPIClient):
         from .resources.releases import ReleasesResource
 
         return ReleasesResource(self)
+
+    @cached_property
+    def cloud(self) -> CloudResource:
+        from .resources.cloud import CloudResource
+
+        return CloudResource(self)
 
     @cached_property
     def with_raw_response(self) -> MiruWithRawResponse:
@@ -527,6 +534,12 @@ class AsyncMiru(AsyncAPIClient):
         return AsyncReleasesResource(self)
 
     @cached_property
+    def cloud(self) -> AsyncCloudResource:
+        from .resources.cloud import AsyncCloudResource
+
+        return AsyncCloudResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncMiruWithRawResponse:
         return AsyncMiruWithRawResponse(self)
 
@@ -717,6 +730,12 @@ class MiruWithRawResponse:
 
         return ReleasesResourceWithRawResponse(self._client.releases)
 
+    @cached_property
+    def cloud(self) -> cloud.CloudResourceWithRawResponse:
+        from .resources.cloud import CloudResourceWithRawResponse
+
+        return CloudResourceWithRawResponse(self._client.cloud)
+
 
 class AsyncMiruWithRawResponse:
     _client: AsyncMiru
@@ -771,6 +790,12 @@ class AsyncMiruWithRawResponse:
         from .resources.releases import AsyncReleasesResourceWithRawResponse
 
         return AsyncReleasesResourceWithRawResponse(self._client.releases)
+
+    @cached_property
+    def cloud(self) -> cloud.AsyncCloudResourceWithRawResponse:
+        from .resources.cloud import AsyncCloudResourceWithRawResponse
+
+        return AsyncCloudResourceWithRawResponse(self._client.cloud)
 
 
 class MiruWithStreamedResponse:
@@ -827,6 +852,12 @@ class MiruWithStreamedResponse:
 
         return ReleasesResourceWithStreamingResponse(self._client.releases)
 
+    @cached_property
+    def cloud(self) -> cloud.CloudResourceWithStreamingResponse:
+        from .resources.cloud import CloudResourceWithStreamingResponse
+
+        return CloudResourceWithStreamingResponse(self._client.cloud)
+
 
 class AsyncMiruWithStreamedResponse:
     _client: AsyncMiru
@@ -881,6 +912,12 @@ class AsyncMiruWithStreamedResponse:
         from .resources.releases import AsyncReleasesResourceWithStreamingResponse
 
         return AsyncReleasesResourceWithStreamingResponse(self._client.releases)
+
+    @cached_property
+    def cloud(self) -> cloud.AsyncCloudResourceWithStreamingResponse:
+        from .resources.cloud import AsyncCloudResourceWithStreamingResponse
+
+        return AsyncCloudResourceWithStreamingResponse(self._client.cloud)
 
 
 Client = Miru

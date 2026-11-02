@@ -8,6 +8,14 @@ from .agent import (
     AgentResourceWithStreamingResponse,
     AsyncAgentResourceWithStreamingResponse,
 )
+from .cloud import (
+    CloudResource,
+    AsyncCloudResource,
+    CloudResourceWithRawResponse,
+    AsyncCloudResourceWithRawResponse,
+    CloudResourceWithStreamingResponse,
+    AsyncCloudResourceWithStreamingResponse,
+)
 from .device import (
     DeviceResource,
     AsyncDeviceResource,
@@ -114,4 +122,10 @@ __all__ = [
     "AsyncReleasesResourceWithRawResponse",
     "ReleasesResourceWithStreamingResponse",
     "AsyncReleasesResourceWithStreamingResponse",
+    "CloudResource",
+    "AsyncCloudResource",
+    "CloudResourceWithRawResponse",
+    "AsyncCloudResourceWithRawResponse",
+    "CloudResourceWithStreamingResponse",
+    "AsyncCloudResourceWithStreamingResponse",
 ]
