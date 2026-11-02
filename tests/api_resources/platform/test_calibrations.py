@@ -9,7 +9,7 @@ import pytest
 
 from tests.utils import assert_matches_type
 from miru_device_sdk import Miru, AsyncMiru
-from miru_device_sdk.types.cloud import (
+from miru_device_sdk.types.platform import (
     Calibration,
     CalibrationList,
 )
@@ -23,7 +23,7 @@ class TestCalibrations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Miru) -> None:
-        calibration = client.cloud.calibrations.retrieve(
+        calibration = client.platform.calibrations.retrieve(
             calibration_id="cal_123",
         )
         assert_matches_type(Calibration, calibration, path=["response"])
@@ -31,7 +31,7 @@ class TestCalibrations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Miru) -> None:
-        calibration = client.cloud.calibrations.retrieve(
+        calibration = client.platform.calibrations.retrieve(
             calibration_id="cal_123",
             expand=["content"],
         )
@@ -40,7 +40,7 @@ class TestCalibrations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Miru) -> None:
-        response = client.cloud.calibrations.with_raw_response.retrieve(
+        response = client.platform.calibrations.with_raw_response.retrieve(
             calibration_id="cal_123",
         )
 
@@ -52,7 +52,7 @@ class TestCalibrations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Miru) -> None:
-        with client.cloud.calibrations.with_streaming_response.retrieve(
+        with client.platform.calibrations.with_streaming_response.retrieve(
             calibration_id="cal_123",
         ) as response:
             assert not response.is_closed
@@ -67,20 +67,20 @@ class TestCalibrations:
     @parametrize
     def test_path_params_retrieve(self, client: Miru) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `calibration_id` but received ''"):
-            client.cloud.calibrations.with_raw_response.retrieve(
+            client.platform.calibrations.with_raw_response.retrieve(
                 calibration_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Miru) -> None:
-        calibration = client.cloud.calibrations.list()
+        calibration = client.platform.calibrations.list()
         assert_matches_type(CalibrationList, calibration, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Miru) -> None:
-        calibration = client.cloud.calibrations.list(
+        calibration = client.platform.calibrations.list(
             aspect=["pose"],
             component=["arm"],
             expand=["content"],
@@ -96,7 +96,7 @@ class TestCalibrations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Miru) -> None:
-        response = client.cloud.calibrations.with_raw_response.list()
+        response = client.platform.calibrations.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -106,7 +106,7 @@ class TestCalibrations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Miru) -> None:
-        with client.cloud.calibrations.with_streaming_response.list() as response:
+        with client.platform.calibrations.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -124,7 +124,7 @@ class TestAsyncCalibrations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncMiru) -> None:
-        calibration = await async_client.cloud.calibrations.retrieve(
+        calibration = await async_client.platform.calibrations.retrieve(
             calibration_id="cal_123",
         )
         assert_matches_type(Calibration, calibration, path=["response"])
@@ -132,7 +132,7 @@ class TestAsyncCalibrations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncMiru) -> None:
-        calibration = await async_client.cloud.calibrations.retrieve(
+        calibration = await async_client.platform.calibrations.retrieve(
             calibration_id="cal_123",
             expand=["content"],
         )
@@ -141,7 +141,7 @@ class TestAsyncCalibrations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncMiru) -> None:
-        response = await async_client.cloud.calibrations.with_raw_response.retrieve(
+        response = await async_client.platform.calibrations.with_raw_response.retrieve(
             calibration_id="cal_123",
         )
 
@@ -153,7 +153,7 @@ class TestAsyncCalibrations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncMiru) -> None:
-        async with async_client.cloud.calibrations.with_streaming_response.retrieve(
+        async with async_client.platform.calibrations.with_streaming_response.retrieve(
             calibration_id="cal_123",
         ) as response:
             assert not response.is_closed
@@ -168,20 +168,20 @@ class TestAsyncCalibrations:
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncMiru) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `calibration_id` but received ''"):
-            await async_client.cloud.calibrations.with_raw_response.retrieve(
+            await async_client.platform.calibrations.with_raw_response.retrieve(
                 calibration_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncMiru) -> None:
-        calibration = await async_client.cloud.calibrations.list()
+        calibration = await async_client.platform.calibrations.list()
         assert_matches_type(CalibrationList, calibration, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncMiru) -> None:
-        calibration = await async_client.cloud.calibrations.list(
+        calibration = await async_client.platform.calibrations.list(
             aspect=["pose"],
             component=["arm"],
             expand=["content"],
@@ -197,7 +197,7 @@ class TestAsyncCalibrations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncMiru) -> None:
-        response = await async_client.cloud.calibrations.with_raw_response.list()
+        response = await async_client.platform.calibrations.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -207,7 +207,7 @@ class TestAsyncCalibrations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncMiru) -> None:
-        async with async_client.cloud.calibrations.with_streaming_response.list() as response:
+        async with async_client.platform.calibrations.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

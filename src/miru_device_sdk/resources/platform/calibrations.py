@@ -17,10 +17,10 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.cloud import calibration_list_params, calibration_retrieve_params
 from ..._base_client import make_request_options
-from ...types.cloud.calibration import Calibration
-from ...types.cloud.calibration_list import CalibrationList
+from ...types.platform import calibration_list_params, calibration_retrieve_params
+from ...types.platform.calibration import Calibration
+from ...types.platform.calibration_list import CalibrationList
 
 __all__ = ["CalibrationsResource", "AsyncCalibrationsResource"]
 
@@ -74,7 +74,7 @@ class CalibrationsResource(SyncAPIResource):
         if not calibration_id:
             raise ValueError(f"Expected a non-empty value for `calibration_id` but received {calibration_id!r}")
         return self._get(
-            path_template("/cloud/calibrations/{calibration_id}", calibration_id=calibration_id),
+            path_template("/platform/calibrations/{calibration_id}", calibration_id=calibration_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -144,7 +144,7 @@ class CalibrationsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/cloud/calibrations",
+            "/platform/calibrations",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -218,7 +218,7 @@ class AsyncCalibrationsResource(AsyncAPIResource):
         if not calibration_id:
             raise ValueError(f"Expected a non-empty value for `calibration_id` but received {calibration_id!r}")
         return await self._get(
-            path_template("/cloud/calibrations/{calibration_id}", calibration_id=calibration_id),
+            path_template("/platform/calibrations/{calibration_id}", calibration_id=calibration_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -290,7 +290,7 @@ class AsyncCalibrationsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/cloud/calibrations",
+            "/platform/calibrations",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

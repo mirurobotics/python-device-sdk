@@ -8,14 +8,6 @@ from .agent import (
     AgentResourceWithStreamingResponse,
     AsyncAgentResourceWithStreamingResponse,
 )
-from .cloud import (
-    CloudResource,
-    AsyncCloudResource,
-    CloudResourceWithRawResponse,
-    AsyncCloudResourceWithRawResponse,
-    CloudResourceWithStreamingResponse,
-    AsyncCloudResourceWithStreamingResponse,
-)
 from .device import (
     DeviceResource,
     AsyncDeviceResource,
@@ -31,6 +23,14 @@ from .events import (
     AsyncEventsResourceWithRawResponse,
     EventsResourceWithStreamingResponse,
     AsyncEventsResourceWithStreamingResponse,
+)
+from .platform import (
+    PlatformResource,
+    AsyncPlatformResource,
+    PlatformResourceWithRawResponse,
+    AsyncPlatformResourceWithRawResponse,
+    PlatformResourceWithStreamingResponse,
+    AsyncPlatformResourceWithStreamingResponse,
 )
 from .releases import (
     ReleasesResource,
@@ -122,10 +122,10 @@ __all__ = [
     "AsyncReleasesResourceWithRawResponse",
     "ReleasesResourceWithStreamingResponse",
     "AsyncReleasesResourceWithStreamingResponse",
-    "CloudResource",
-    "AsyncCloudResource",
-    "CloudResourceWithRawResponse",
-    "AsyncCloudResourceWithRawResponse",
-    "CloudResourceWithStreamingResponse",
-    "AsyncCloudResourceWithStreamingResponse",
+    "PlatformResource",
+    "AsyncPlatformResource",
+    "PlatformResourceWithRawResponse",
+    "AsyncPlatformResourceWithRawResponse",
+    "PlatformResourceWithStreamingResponse",
+    "AsyncPlatformResourceWithStreamingResponse",
 ]

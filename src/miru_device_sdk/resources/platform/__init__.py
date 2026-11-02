@@ -1,12 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .cloud import (
-    CloudResource,
-    AsyncCloudResource,
-    CloudResourceWithRawResponse,
-    AsyncCloudResourceWithRawResponse,
-    CloudResourceWithStreamingResponse,
-    AsyncCloudResourceWithStreamingResponse,
+from .platform import (
+    PlatformResource,
+    AsyncPlatformResource,
+    PlatformResourceWithRawResponse,
+    AsyncPlatformResourceWithRawResponse,
+    PlatformResourceWithStreamingResponse,
+    AsyncPlatformResourceWithStreamingResponse,
 )
 from .calibrations import (
     CalibrationsResource,
@@ -24,10 +24,10 @@ __all__ = [
     "AsyncCalibrationsResourceWithRawResponse",
     "CalibrationsResourceWithStreamingResponse",
     "AsyncCalibrationsResourceWithStreamingResponse",
-    "CloudResource",
-    "AsyncCloudResource",
-    "CloudResourceWithRawResponse",
-    "AsyncCloudResourceWithRawResponse",
-    "CloudResourceWithStreamingResponse",
-    "AsyncCloudResourceWithStreamingResponse",
+    "PlatformResource",
+    "AsyncPlatformResource",
+    "PlatformResourceWithRawResponse",
+    "AsyncPlatformResourceWithRawResponse",
+    "PlatformResourceWithStreamingResponse",
+    "AsyncPlatformResourceWithStreamingResponse",
 ]

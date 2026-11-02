@@ -13,90 +13,90 @@ from .calibrations import (
     AsyncCalibrationsResourceWithStreamingResponse,
 )
 
-__all__ = ["CloudResource", "AsyncCloudResource"]
+__all__ = ["PlatformResource", "AsyncPlatformResource"]
 
 
-class CloudResource(SyncAPIResource):
+class PlatformResource(SyncAPIResource):
     @cached_property
     def calibrations(self) -> CalibrationsResource:
         return CalibrationsResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> CloudResourceWithRawResponse:
+    def with_raw_response(self) -> PlatformResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/mirurobotics/python-device-sdk#accessing-raw-response-data-eg-headers
         """
-        return CloudResourceWithRawResponse(self)
+        return PlatformResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> CloudResourceWithStreamingResponse:
+    def with_streaming_response(self) -> PlatformResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/mirurobotics/python-device-sdk#with_streaming_response
         """
-        return CloudResourceWithStreamingResponse(self)
+        return PlatformResourceWithStreamingResponse(self)
 
 
-class AsyncCloudResource(AsyncAPIResource):
+class AsyncPlatformResource(AsyncAPIResource):
     @cached_property
     def calibrations(self) -> AsyncCalibrationsResource:
         return AsyncCalibrationsResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncCloudResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncPlatformResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/mirurobotics/python-device-sdk#accessing-raw-response-data-eg-headers
         """
-        return AsyncCloudResourceWithRawResponse(self)
+        return AsyncPlatformResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncCloudResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncPlatformResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/mirurobotics/python-device-sdk#with_streaming_response
         """
-        return AsyncCloudResourceWithStreamingResponse(self)
+        return AsyncPlatformResourceWithStreamingResponse(self)
 
 
-class CloudResourceWithRawResponse:
-    def __init__(self, cloud: CloudResource) -> None:
-        self._cloud = cloud
+class PlatformResourceWithRawResponse:
+    def __init__(self, platform: PlatformResource) -> None:
+        self._platform = platform
 
     @cached_property
     def calibrations(self) -> CalibrationsResourceWithRawResponse:
-        return CalibrationsResourceWithRawResponse(self._cloud.calibrations)
+        return CalibrationsResourceWithRawResponse(self._platform.calibrations)
 
 
-class AsyncCloudResourceWithRawResponse:
-    def __init__(self, cloud: AsyncCloudResource) -> None:
-        self._cloud = cloud
+class AsyncPlatformResourceWithRawResponse:
+    def __init__(self, platform: AsyncPlatformResource) -> None:
+        self._platform = platform
 
     @cached_property
     def calibrations(self) -> AsyncCalibrationsResourceWithRawResponse:
-        return AsyncCalibrationsResourceWithRawResponse(self._cloud.calibrations)
+        return AsyncCalibrationsResourceWithRawResponse(self._platform.calibrations)
 
 
-class CloudResourceWithStreamingResponse:
-    def __init__(self, cloud: CloudResource) -> None:
-        self._cloud = cloud
+class PlatformResourceWithStreamingResponse:
+    def __init__(self, platform: PlatformResource) -> None:
+        self._platform = platform
 
     @cached_property
     def calibrations(self) -> CalibrationsResourceWithStreamingResponse:
-        return CalibrationsResourceWithStreamingResponse(self._cloud.calibrations)
+        return CalibrationsResourceWithStreamingResponse(self._platform.calibrations)
 
 
-class AsyncCloudResourceWithStreamingResponse:
-    def __init__(self, cloud: AsyncCloudResource) -> None:
-        self._cloud = cloud
+class AsyncPlatformResourceWithStreamingResponse:
+    def __init__(self, platform: AsyncPlatformResource) -> None:
+        self._platform = platform
 
     @cached_property
     def calibrations(self) -> AsyncCalibrationsResourceWithStreamingResponse:
-        return AsyncCalibrationsResourceWithStreamingResponse(self._cloud.calibrations)
+        return AsyncCalibrationsResourceWithStreamingResponse(self._platform.calibrations)
