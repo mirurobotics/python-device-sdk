@@ -12,10 +12,11 @@ __all__ = ["EventStreamParams"]
 
 class EventStreamParams(TypedDict, total=False):
     after: int
-    """Event ID cursor.
+    """Event ID cursor to resume from.
 
-    Only events with `id` greater than this value are returned. Takes precedence
-    over the `Last-Event-ID` header.
+    Retained events with `id` greater than this value are replayed, then live events
+    follow. If the cursor is older than the earliest retained event, the server
+    returns `410 Gone`. Takes precedence over the `Last-Event-ID` header.
     """
 
     types: SequenceNotStr[str]

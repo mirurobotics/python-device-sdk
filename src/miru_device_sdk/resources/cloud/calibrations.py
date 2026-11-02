@@ -57,10 +57,8 @@ class CalibrationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Calibration:
-        """Retrieve a calibration Miru recorded for this device by its ID.
-
-        Requires the
-        agent to reach Miru.
+        """
+        Retrieve a calibration by its ID from the control plane.
 
         Args:
           expand: Fields to expand on the calibration.
@@ -109,11 +107,8 @@ class CalibrationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CalibrationList:
-        """List the calibrations Miru recorded for this device.
-
-        Requires the agent to reach
-        Miru. By default, results are ordered by `created_at` descending, with ties
-        broken by `id`.
+        """
+        List the device's calibrations from the control plane.
 
         Args:
           aspect: The aspect slugs to filter by; `null` matches calibrations reported without an
@@ -130,7 +125,7 @@ class CalibrationsResource(SyncAPIResource):
           offset: The offset of the items to return. An offset of 10 with a limit of 10 returns
               items 11-20.
 
-          order_by: Sort order for the calibration results.
+          order_by: Sort order for the calibration results. Ties are broken by `id`.
 
           report_id: The report IDs to filter by.
 
@@ -206,10 +201,8 @@ class AsyncCalibrationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Calibration:
-        """Retrieve a calibration Miru recorded for this device by its ID.
-
-        Requires the
-        agent to reach Miru.
+        """
+        Retrieve a calibration by its ID from the control plane.
 
         Args:
           expand: Fields to expand on the calibration.
@@ -260,11 +253,8 @@ class AsyncCalibrationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CalibrationList:
-        """List the calibrations Miru recorded for this device.
-
-        Requires the agent to reach
-        Miru. By default, results are ordered by `created_at` descending, with ties
-        broken by `id`.
+        """
+        List the device's calibrations from the control plane.
 
         Args:
           aspect: The aspect slugs to filter by; `null` matches calibrations reported without an
@@ -281,7 +271,7 @@ class AsyncCalibrationsResource(AsyncAPIResource):
           offset: The offset of the items to return. An offset of 10 with a limit of 10 returns
               items 11-20.
 
-          order_by: Sort order for the calibration results.
+          order_by: Sort order for the calibration results. Ties are broken by `id`.
 
           report_id: The report IDs to filter by.
 

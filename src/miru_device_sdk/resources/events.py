@@ -58,17 +58,11 @@ class EventsResource(SyncAPIResource):
         """
         Subscribe to a Server-Sent Events (SSE) stream of agent lifecycle events.
 
-        The stream replays retained historical events after the cursor, then delivers
-        live events as they occur. Events are delivered at-least-once; clients should
-        deduplicate by event `id`.
-
-        Use the `after` query parameter or `Last-Event-ID` header to resume from a
-        previous position. If the cursor is older than the earliest retained event, the
-        server returns `410 Gone`.
-
         Args:
-          after: Event ID cursor. Only events with `id` greater than this value are returned.
-              Takes precedence over the `Last-Event-ID` header.
+          after: Event ID cursor to resume from. Retained events with `id` greater than this
+              value are replayed, then live events follow. If the cursor is older than the
+              earliest retained event, the server returns `410 Gone`. Takes precedence over
+              the `Last-Event-ID` header.
 
           types: Event types to receive. If omitted, all event types are sent.
 
@@ -139,17 +133,11 @@ class AsyncEventsResource(AsyncAPIResource):
         """
         Subscribe to a Server-Sent Events (SSE) stream of agent lifecycle events.
 
-        The stream replays retained historical events after the cursor, then delivers
-        live events as they occur. Events are delivered at-least-once; clients should
-        deduplicate by event `id`.
-
-        Use the `after` query parameter or `Last-Event-ID` header to resume from a
-        previous position. If the cursor is older than the earliest retained event, the
-        server returns `410 Gone`.
-
         Args:
-          after: Event ID cursor. Only events with `id` greater than this value are returned.
-              Takes precedence over the `Last-Event-ID` header.
+          after: Event ID cursor to resume from. Retained events with `id` greater than this
+              value are replayed, then live events follow. If the cursor is older than the
+              earliest retained event, the server returns `410 Gone`. Takes precedence over
+              the `Last-Event-ID` header.
 
           types: Event types to receive. If omitted, all event types are sent.
 

@@ -125,15 +125,7 @@ class Upload(BaseModel):
 
 class FileRule(BaseModel):
     """
-    A file rule declares which files on a device Miru manages and what to do
-    with them: upload them to a bucket, delete the local copies once they
-    are no longer needed, or both. `retention` is optional and marks the
-    rules that delete: when it is absent the device keeps matching files
-    indefinitely — Miru never deletes them — and when it is present the rule
-    deletes each matching file once its retention guarantee ends. A rule
-    that both deletes and uploads always states `retention.require_upload`,
-    so whether local deletion waits for the upload is itself an explicit
-    decision.
+    A file rule declares which files on a device Miru manages and whether to upload them, delete them, or both.
     """
 
     id: str

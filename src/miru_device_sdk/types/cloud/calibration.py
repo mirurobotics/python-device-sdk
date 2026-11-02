@@ -10,7 +10,10 @@ __all__ = ["Calibration", "Content"]
 
 
 class Content(BaseModel):
-    """The calibration's content. Expand using `expand=content` in the query string."""
+    """The calibration's content, at most 1 MiB.
+
+    Expand using `expand=content` in the query string.
+    """
 
     data: str
     """The content's values, serialized in `format`."""
@@ -30,9 +33,9 @@ class Content(BaseModel):
 
 
 class Calibration(BaseModel):
-    """One calibration reported by a device for a unit of a component.
+    """A calibration the device reported for a unit of a component.
 
-    Calibrations are immutable and append-only; a device's history is kept per component, role, and aspect. Content is at most 1 MiB.
+    Calibrations are immutable.
     """
 
     id: str
@@ -82,4 +85,7 @@ class Calibration(BaseModel):
     """
 
     content: Optional[Content] = None
-    """The calibration's content. Expand using `expand=content` in the query string."""
+    """The calibration's content, at most 1 MiB.
+
+    Expand using `expand=content` in the query string.
+    """
