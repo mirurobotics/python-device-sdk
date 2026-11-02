@@ -46,7 +46,7 @@ from .lib.device_api import (
 )
 
 if TYPE_CHECKING:
-    from .resources import agent, device, events, platform, releases, file_rules, deployments, git_commits, calibrations
+    from .resources import agent, device, events, releases, file_rules, deployments, git_commits, calibrations
     from .resources.agent import AgentResource, AsyncAgentResource
     from .resources.device import DeviceResource, AsyncDeviceResource
     from .resources.events import EventsResource, AsyncEventsResource
@@ -55,7 +55,6 @@ if TYPE_CHECKING:
     from .resources.deployments import DeploymentsResource, AsyncDeploymentsResource
     from .resources.git_commits import GitCommitsResource, AsyncGitCommitsResource
     from .resources.calibrations import CalibrationsResource, AsyncCalibrationsResource
-    from .resources.platform.platform import PlatformResource, AsyncPlatformResource
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Miru", "AsyncMiru", "Client", "AsyncClient"]
 
@@ -248,12 +247,6 @@ class Miru(SyncAPIClient):
         from .resources.releases import ReleasesResource
 
         return ReleasesResource(self)
-
-    @cached_property
-    def platform(self) -> PlatformResource:
-        from .resources.platform import PlatformResource
-
-        return PlatformResource(self)
 
     @cached_property
     def with_raw_response(self) -> MiruWithRawResponse:
@@ -534,12 +527,6 @@ class AsyncMiru(AsyncAPIClient):
         return AsyncReleasesResource(self)
 
     @cached_property
-    def platform(self) -> AsyncPlatformResource:
-        from .resources.platform import AsyncPlatformResource
-
-        return AsyncPlatformResource(self)
-
-    @cached_property
     def with_raw_response(self) -> AsyncMiruWithRawResponse:
         return AsyncMiruWithRawResponse(self)
 
@@ -730,12 +717,6 @@ class MiruWithRawResponse:
 
         return ReleasesResourceWithRawResponse(self._client.releases)
 
-    @cached_property
-    def platform(self) -> platform.PlatformResourceWithRawResponse:
-        from .resources.platform import PlatformResourceWithRawResponse
-
-        return PlatformResourceWithRawResponse(self._client.platform)
-
 
 class AsyncMiruWithRawResponse:
     _client: AsyncMiru
@@ -790,12 +771,6 @@ class AsyncMiruWithRawResponse:
         from .resources.releases import AsyncReleasesResourceWithRawResponse
 
         return AsyncReleasesResourceWithRawResponse(self._client.releases)
-
-    @cached_property
-    def platform(self) -> platform.AsyncPlatformResourceWithRawResponse:
-        from .resources.platform import AsyncPlatformResourceWithRawResponse
-
-        return AsyncPlatformResourceWithRawResponse(self._client.platform)
 
 
 class MiruWithStreamedResponse:
@@ -852,12 +827,6 @@ class MiruWithStreamedResponse:
 
         return ReleasesResourceWithStreamingResponse(self._client.releases)
 
-    @cached_property
-    def platform(self) -> platform.PlatformResourceWithStreamingResponse:
-        from .resources.platform import PlatformResourceWithStreamingResponse
-
-        return PlatformResourceWithStreamingResponse(self._client.platform)
-
 
 class AsyncMiruWithStreamedResponse:
     _client: AsyncMiru
@@ -912,12 +881,6 @@ class AsyncMiruWithStreamedResponse:
         from .resources.releases import AsyncReleasesResourceWithStreamingResponse
 
         return AsyncReleasesResourceWithStreamingResponse(self._client.releases)
-
-    @cached_property
-    def platform(self) -> platform.AsyncPlatformResourceWithStreamingResponse:
-        from .resources.platform import AsyncPlatformResourceWithStreamingResponse
-
-        return AsyncPlatformResourceWithStreamingResponse(self._client.platform)
 
 
 Client = Miru

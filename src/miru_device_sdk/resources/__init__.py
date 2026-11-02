@@ -24,14 +24,6 @@ from .events import (
     EventsResourceWithStreamingResponse,
     AsyncEventsResourceWithStreamingResponse,
 )
-from .platform import (
-    PlatformResource,
-    AsyncPlatformResource,
-    PlatformResourceWithRawResponse,
-    AsyncPlatformResourceWithRawResponse,
-    PlatformResourceWithStreamingResponse,
-    AsyncPlatformResourceWithStreamingResponse,
-)
 from .releases import (
     ReleasesResource,
     AsyncReleasesResource,
@@ -122,10 +114,4 @@ __all__ = [
     "AsyncReleasesResourceWithRawResponse",
     "ReleasesResourceWithStreamingResponse",
     "AsyncReleasesResourceWithStreamingResponse",
-    "PlatformResource",
-    "AsyncPlatformResource",
-    "PlatformResourceWithRawResponse",
-    "AsyncPlatformResourceWithRawResponse",
-    "PlatformResourceWithStreamingResponse",
-    "AsyncPlatformResourceWithStreamingResponse",
 ]

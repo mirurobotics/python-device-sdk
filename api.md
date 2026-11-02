@@ -97,18 +97,3 @@ Methods:
 
 - <code title="get /releases/{release_id}">client.releases.<a href="./src/miru_device_sdk/resources/releases.py">retrieve</a>(release_id) -> <a href="./src/miru_device_sdk/types/release.py">Release</a></code>
 - <code title="get /releases/current">client.releases.<a href="./src/miru_device_sdk/resources/releases.py">current</a>() -> <a href="./src/miru_device_sdk/types/release.py">Release</a></code>
-
-# Platform
-
-## Calibrations
-
-Types:
-
-```python
-from miru_device_sdk.types.platform import Calibration, CalibrationList
-```
-
-Methods:
-
-- <code title="get /platform/calibrations/{calibration_id}">client.platform.calibrations.<a href="./src/miru_device_sdk/resources/platform/calibrations.py">retrieve</a>(calibration_id, \*\*<a href="src/miru_device_sdk/types/platform/calibration_retrieve_params.py">params</a>) -> <a href="./src/miru_device_sdk/types/platform/calibration.py">Calibration</a></code>
-- <code title="get /platform/calibrations">client.platform.calibrations.<a href="./src/miru_device_sdk/resources/platform/calibrations.py">list</a>(\*\*<a href="src/miru_device_sdk/types/platform/calibration_list_params.py">params</a>) -> <a href="./src/miru_device_sdk/types/platform/calibration_list.py">CalibrationList</a></code>
