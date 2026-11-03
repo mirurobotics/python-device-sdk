@@ -61,9 +61,10 @@ class Content(TypedDict, total=False):
     """The content's values, serialized in `format`."""
 
     format: Required[Literal["json", "yaml", "jsonc", "xml", "csv", "text"]]
-    """The serialization format of config content.
-
-    A config instance is written to the device filesystem in this format.
+    """
+    The serialization format of stored content, such as a config instance or a
+    calibration. A config instance is written to the device filesystem in this
+    format.
 
     - `json`: standard JSON.
     - `yaml`: YAML 1.2.
