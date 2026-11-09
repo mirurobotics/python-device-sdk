@@ -170,8 +170,7 @@ class CalibrationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CalibrationLatestResponse:
         """
-        List the latest calibration for each component, role and aspect on the device,
-        uploaded or not.
+        List the latest calibration for each component, role and aspect on the device.
 
         Args:
           aspect: The aspect slugs to filter by; `null` matches calibrations reported without an
@@ -352,8 +351,7 @@ class AsyncCalibrationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CalibrationLatestResponse:
         """
-        List the latest calibration for each component, role and aspect on the device,
-        uploaded or not.
+        List the latest calibration for each component, role and aspect on the device.
 
         Args:
           aspect: The aspect slugs to filter by; `null` matches calibrations reported without an

@@ -10,9 +10,7 @@ __all__ = ["Calibration"]
 
 
 class Calibration(BaseModel):
-    """
-    The newest calibration the device has for one component, role and aspect, uploaded or not.
-    """
+    """The newest calibration the device has for one component, role and aspect."""
 
     aspect: Optional[str] = None
     """
@@ -51,13 +49,4 @@ class Calibration(BaseModel):
     """
     Serial number of the physical unit that was calibrated, not of the device, such
     as `SN-1234`, or null if none was reported. Free text, at most 255 characters.
-    """
-
-    upload_status: Literal["queued", "uploaded", "dropped"]
-    """Whether the agent has uploaded the calibration to Miru.
-
-    - `queued`: the agent will upload it once it can reach Miru.
-    - `uploaded`: Miru has recorded it.
-    - `dropped`: the agent gave up uploading it. The device still uses it, but Miru
-      never recorded it.
     """

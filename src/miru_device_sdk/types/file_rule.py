@@ -82,14 +82,16 @@ class Upload(BaseModel):
     path: str
     """Object-path template for the uploaded file.
 
-    Contains `{upload_id}`, is at most 1024 bytes, has balanced braces, and contains
-    no `..` or empty segments. Variables: `{device_id}`, `{device_name}`,
-    `{file_name}`, `{upload_id}`, `{bundle_id}`, `{year}`, `{month}`, `{day}`,
-    `{hour}`, `{minute}`, `{timezone}`, plus any `source.glob` capture.
-    `{bundle_id}` requires `bundle`. The time variables are zero-padded and rendered
-    from the file's mtime (its last-modified time, from the device clock) in
-    `timezone`; `{timezone}` is that instant's UTC offset in ISO 8601 basic format
-    (`+0000`, `-0500`).
+    Contains `{upload_id}` or at least one of `{device_id}`, `{device_name}` or
+    `{bundle_id}`; without `{upload_id}`, a file whose rendered path another upload
+    already holds is not uploaded. It is at most 1024 bytes, has balanced braces,
+    and contains no `..` or empty segments. Variables: `{device_id}`,
+    `{device_name}`, `{file_name}`, `{upload_id}`, `{bundle_id}`, `{year}`,
+    `{month}`, `{day}`, `{hour}`, `{minute}`, `{timezone}`, plus any `source.glob`
+    capture. `{bundle_id}` requires `bundle`. The time variables are zero-padded and
+    rendered from the file's mtime (its last-modified time, from the device clock)
+    in `timezone`; `{timezone}` is that instant's UTC offset in ISO 8601 basic
+    format (`+0000`, `-0500`).
     """
 
     timezone: Literal["utc", "device"]
