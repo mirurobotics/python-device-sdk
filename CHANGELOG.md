@@ -1,5 +1,38 @@
 # Changelog
 
+## [0.10.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.9.0...v0.10.0) (2026-11-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* **device:** move the calibration content download under /calibrations/latest ([#468](https://github.com/mirurobotics/python-device-sdk/issues/468))
+* **device:** drop is_confirmed from the latest calibrations response ([#466](https://github.com/mirurobotics/python-device-sdk/issues/466))
+* **device:** rename the /cloud calibration endpoints to /platform ([#409](https://github.com/mirurobotics/python-device-sdk/issues/409))
+
+### Features
+
+* **device,agent:** let device apps read their calibrations from Miru via /cloud ([#370](https://github.com/mirurobotics/python-device-sdk/issues/370)) ([3ac3073](https://github.com/mirurobotics/python-device-sdk/commit/3ac3073d583b6628e88c149aead8c4643f28be43))
+* **device,agent:** read the latest calibrations on the device ([#416](https://github.com/mirurobotics/python-device-sdk/issues/416)) ([379ecf6](https://github.com/mirurobotics/python-device-sdk/commit/379ecf6691df5ccae6db91342ba250175c2bbf71))
+* **device:** drop is_confirmed from the latest calibrations response ([#466](https://github.com/mirurobotics/python-device-sdk/issues/466)) ([f277e4c](https://github.com/mirurobotics/python-device-sdk/commit/f277e4cfb3c2db26b2a708d72d54f56744856a86))
+* **device:** move the calibration content download under /calibrations/latest ([#468](https://github.com/mirurobotics/python-device-sdk/issues/468)) ([e5372e4](https://github.com/mirurobotics/python-device-sdk/commit/e5372e4fba31aeacb0d8287b3e310e5752f1626f))
+* **platform:** add attribution, users, archived_at and schema git commits ([#374](https://github.com/mirurobotics/python-device-sdk/issues/374)) ([9772d7b](https://github.com/mirurobotics/python-device-sdk/commit/9772d7bb91d693256189798928b56682af3d0cc3))
+* **uploads:** allow readable file rule paths without {upload_id} ([#375](https://github.com/mirurobotics/python-device-sdk/issues/375)) ([4e1b527](https://github.com/mirurobotics/python-device-sdk/commit/4e1b527c4875e953d1757dbb7af703644b92c134))
+
+
+### Bug Fixes
+
+* **platform:** send 2026-10-29.everglades as the SDK's default Miru-Version ([#401](https://github.com/mirurobotics/python-device-sdk/issues/401)) ([4cf4452](https://github.com/mirurobotics/python-device-sdk/commit/4cf4452c83cbdef34128ded4255e7759611decd7))
+
+
+### Documentation
+
+* **device:** shorten long descriptions in the Device API spec ([#405](https://github.com/mirurobotics/python-device-sdk/issues/405)) ([5642ce1](https://github.com/mirurobotics/python-device-sdk/commit/5642ce118e2600ba3532aa73d483df5235b2e1f9))
+
+
+### Refactors
+
+* **device:** rename the /cloud calibration endpoints to /platform ([#409](https://github.com/mirurobotics/python-device-sdk/issues/409)) ([a82237f](https://github.com/mirurobotics/python-device-sdk/commit/a82237fd303e329c0ed934257ec6aa3ec4a5f27c))
+
 ## [0.9.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.8.1...v0.9.0) (2026-10-29)
 
 
