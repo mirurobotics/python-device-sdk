@@ -84,8 +84,9 @@ class Upload(BaseModel):
 
     Contains `{upload_id}` or at least one of `{device_id}`, `{device_name}` or
     `{bundle_id}`; without `{upload_id}`, a file whose rendered path another upload
-    already holds is not uploaded. It is at most 1024 bytes, has balanced braces,
-    and contains no `..` or empty segments. Variables: `{device_id}`,
+    already holds is stored with `{upload_id}` as a folder before its last segment
+    (`run_42/{upload_id}/camera.mcap`). It is at most 1024 bytes, has balanced
+    braces, and contains no `..` or empty segments. Variables: `{device_id}`,
     `{device_name}`, `{file_name}`, `{upload_id}`, `{bundle_id}`, `{year}`,
     `{month}`, `{day}`, `{hour}`, `{minute}`, `{timezone}`, plus any `source.glob`
     capture. `{bundle_id}` requires `bundle`. The time variables are zero-padded and
