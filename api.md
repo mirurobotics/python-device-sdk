@@ -22,7 +22,7 @@ from miru_device_sdk.types import Calibration, CalibrationCreateResponse, Calibr
 Methods:
 
 - <code title="post /calibrations">client.calibrations.<a href="./src/miru_device_sdk/resources/calibrations.py">create</a>(\*\*<a href="src/miru_device_sdk/types/calibration_create_params.py">params</a>) -> <a href="./src/miru_device_sdk/types/calibration_create_response.py">CalibrationCreateResponse</a></code>
-- <code title="get /calibrations/{report_id}/content">client.calibrations.<a href="./src/miru_device_sdk/resources/calibrations.py">download</a>(report_id) -> BinaryAPIResponse</code>
+- <code title="get /calibrations/latest/{report_id}/content">client.calibrations.<a href="./src/miru_device_sdk/resources/calibrations.py">download</a>(report_id) -> BinaryAPIResponse</code>
 - <code title="get /calibrations/latest">client.calibrations.<a href="./src/miru_device_sdk/resources/calibrations.py">latest</a>(\*\*<a href="src/miru_device_sdk/types/calibration_latest_params.py">params</a>) -> <a href="./src/miru_device_sdk/types/calibration_latest_response.py">CalibrationLatestResponse</a></code>
 
 # Deployments

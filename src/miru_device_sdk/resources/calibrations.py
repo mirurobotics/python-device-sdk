@@ -149,7 +149,7 @@ class CalibrationsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `report_id` but received {report_id!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return self._get(
-            path_template("/calibrations/{report_id}/content", report_id=report_id),
+            path_template("/calibrations/latest/{report_id}/content", report_id=report_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -330,7 +330,7 @@ class AsyncCalibrationsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `report_id` but received {report_id!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return await self._get(
-            path_template("/calibrations/{report_id}/content", report_id=report_id),
+            path_template("/calibrations/latest/{report_id}/content", report_id=report_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

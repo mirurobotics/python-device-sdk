@@ -93,7 +93,7 @@ class TestCalibrations:
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_method_download(self, client: Miru, respx_mock: MockRouter) -> None:
-        respx_mock.get("/calibrations/0b6f3c2e-6a51-4e0f-9a43-2f1d7c9e8b10/content").mock(
+        respx_mock.get("/calibrations/latest/0b6f3c2e-6a51-4e0f-9a43-2f1d7c9e8b10/content").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
         calibration = client.calibrations.download(
@@ -107,7 +107,7 @@ class TestCalibrations:
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response_download(self, client: Miru, respx_mock: MockRouter) -> None:
-        respx_mock.get("/calibrations/0b6f3c2e-6a51-4e0f-9a43-2f1d7c9e8b10/content").mock(
+        respx_mock.get("/calibrations/latest/0b6f3c2e-6a51-4e0f-9a43-2f1d7c9e8b10/content").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
 
@@ -123,7 +123,7 @@ class TestCalibrations:
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     def test_streaming_response_download(self, client: Miru, respx_mock: MockRouter) -> None:
-        respx_mock.get("/calibrations/0b6f3c2e-6a51-4e0f-9a43-2f1d7c9e8b10/content").mock(
+        respx_mock.get("/calibrations/latest/0b6f3c2e-6a51-4e0f-9a43-2f1d7c9e8b10/content").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
         with client.calibrations.with_streaming_response.download(
@@ -255,7 +255,7 @@ class TestAsyncCalibrations:
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_method_download(self, async_client: AsyncMiru, respx_mock: MockRouter) -> None:
-        respx_mock.get("/calibrations/0b6f3c2e-6a51-4e0f-9a43-2f1d7c9e8b10/content").mock(
+        respx_mock.get("/calibrations/latest/0b6f3c2e-6a51-4e0f-9a43-2f1d7c9e8b10/content").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
         calibration = await async_client.calibrations.download(
@@ -269,7 +269,7 @@ class TestAsyncCalibrations:
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_raw_response_download(self, async_client: AsyncMiru, respx_mock: MockRouter) -> None:
-        respx_mock.get("/calibrations/0b6f3c2e-6a51-4e0f-9a43-2f1d7c9e8b10/content").mock(
+        respx_mock.get("/calibrations/latest/0b6f3c2e-6a51-4e0f-9a43-2f1d7c9e8b10/content").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
 
@@ -285,7 +285,7 @@ class TestAsyncCalibrations:
     @parametrize
     @pytest.mark.respx(base_url=base_url)
     async def test_streaming_response_download(self, async_client: AsyncMiru, respx_mock: MockRouter) -> None:
-        respx_mock.get("/calibrations/0b6f3c2e-6a51-4e0f-9a43-2f1d7c9e8b10/content").mock(
+        respx_mock.get("/calibrations/latest/0b6f3c2e-6a51-4e0f-9a43-2f1d7c9e8b10/content").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
         async with async_client.calibrations.with_streaming_response.download(
