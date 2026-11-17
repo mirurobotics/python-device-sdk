@@ -10,16 +10,16 @@ __all__ = ["Calibration"]
 
 
 class Calibration(BaseModel):
-    """The newest calibration the device has for one component, role and aspect."""
-
-    aspect: Optional[str] = None
-    """
-    Slug of the aspect of the unit that was calibrated, as it was reported; null if
-    no aspect was reported.
-    """
+    """The newest calibration the device has for one component."""
 
     component: str
-    """Slug of the component the calibrated unit belongs to, as it was reported."""
+    """Slug of the component the calibrated unit belongs to."""
+
+    invalidated_at: Optional[datetime] = None
+    """
+    Timestamp of when a device app marked this calibration invalid, or null if it is
+    valid. A newer calibration for the component replaces it.
+    """
 
     object: Literal["calibration"]
     """The object type, which is always `calibration`."""
@@ -37,12 +37,6 @@ class Calibration(BaseModel):
     """
     Who reported the calibration, as it was reported, such as `Benjamin Smidt`; null
     if no one was reported.
-    """
-
-    role: Optional[str] = None
-    """
-    Slug of the role the calibrated unit fills on the device, as it was reported;
-    null if no role was reported.
     """
 
     serial_number: Optional[str] = None

@@ -723,7 +723,7 @@ class TestMiru:
         custom_transport = httpx.HTTPTransport()
         custom_http_client = httpx.Client(
             transport=custom_transport,
-            base_url="http://localhost/v0.2",
+            base_url="http://localhost/v0.3",
             follow_redirects=True,
             limits=httpx.Limits(max_connections=100, max_keepalive_connections=20),
         )
@@ -1661,7 +1661,7 @@ class TestAsyncMiru:
         custom_transport = httpx.AsyncHTTPTransport()
         custom_http_client = httpx.AsyncClient(
             transport=custom_transport,
-            base_url="http://localhost/v0.2",
+            base_url="http://localhost/v0.3",
             follow_redirects=True,
             limits=httpx.Limits(max_connections=100, max_keepalive_connections=20),
         )

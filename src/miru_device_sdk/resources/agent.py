@@ -14,6 +14,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.agent_sync_response import AgentSyncResponse
 from ..types.agent_health_response import AgentHealthResponse
 from ..types.agent_version_response import AgentVersionResponse
 
@@ -57,6 +58,25 @@ class AgentResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AgentHealthResponse,
+        )
+
+    def sync(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentSyncResponse:
+        """Manually force a device sync with the edits made in the dashboard."""
+        return self._post(
+            "/sync",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentSyncResponse,
         )
 
     def version(
@@ -118,6 +138,25 @@ class AsyncAgentResource(AsyncAPIResource):
             cast_to=AgentHealthResponse,
         )
 
+    async def sync(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentSyncResponse:
+        """Manually force a device sync with the edits made in the dashboard."""
+        return await self._post(
+            "/sync",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentSyncResponse,
+        )
+
     async def version(
         self,
         *,
@@ -145,6 +184,9 @@ class AgentResourceWithRawResponse:
         self.health = to_raw_response_wrapper(
             agent.health,
         )
+        self.sync = to_raw_response_wrapper(
+            agent.sync,
+        )
         self.version = to_raw_response_wrapper(
             agent.version,
         )
@@ -156,6 +198,9 @@ class AsyncAgentResourceWithRawResponse:
 
         self.health = async_to_raw_response_wrapper(
             agent.health,
+        )
+        self.sync = async_to_raw_response_wrapper(
+            agent.sync,
         )
         self.version = async_to_raw_response_wrapper(
             agent.version,
@@ -169,6 +214,9 @@ class AgentResourceWithStreamingResponse:
         self.health = to_streamed_response_wrapper(
             agent.health,
         )
+        self.sync = to_streamed_response_wrapper(
+            agent.sync,
+        )
         self.version = to_streamed_response_wrapper(
             agent.version,
         )
@@ -180,6 +228,9 @@ class AsyncAgentResourceWithStreamingResponse:
 
         self.health = async_to_streamed_response_wrapper(
             agent.health,
+        )
+        self.sync = async_to_streamed_response_wrapper(
+            agent.sync,
         )
         self.version = async_to_streamed_response_wrapper(
             agent.version,

@@ -12,6 +12,7 @@ from respx import MockRouter
 from tests.utils import assert_matches_type
 from miru_device_sdk import Miru, AsyncMiru
 from miru_device_sdk.types import (
+    Calibration,
     CalibrationCreateResponse,
     CalibrationLatestResponse,
 )
@@ -49,9 +50,7 @@ class TestCalibrations:
                 "data": '{\n  "enable_autonomy": true,\n  "enable_remote_control": true,\n  "max_payload_kg": 10.0\n}\n',
                 "format": "json",
             },
-            aspect="pose",
             reported_by="Benjamin Smidt",
-            role="front-left",
             serial_number="SN-1234",
         )
         assert_matches_type(CalibrationCreateResponse, calibration, path=["response"])
@@ -148,6 +147,53 @@ class TestCalibrations:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_invalidate(self, client: Miru) -> None:
+        calibration = client.calibrations.invalidate(
+            component="arm",
+            reason="power cycle",
+        )
+        assert_matches_type(Calibration, calibration, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_invalidate_with_all_params(self, client: Miru) -> None:
+        calibration = client.calibrations.invalidate(
+            component="arm",
+            reason="power cycle",
+            report_id="0b6f3c2e-6a51-4e0f-9a43-2f1d7c9e8b10",
+        )
+        assert_matches_type(Calibration, calibration, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_invalidate(self, client: Miru) -> None:
+        response = client.calibrations.with_raw_response.invalidate(
+            component="arm",
+            reason="power cycle",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        calibration = response.parse()
+        assert_matches_type(Calibration, calibration, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_invalidate(self, client: Miru) -> None:
+        with client.calibrations.with_streaming_response.invalidate(
+            component="arm",
+            reason="power cycle",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            calibration = response.parse()
+            assert_matches_type(Calibration, calibration, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_method_latest(self, client: Miru) -> None:
         calibration = client.calibrations.latest()
         assert_matches_type(CalibrationLatestResponse, calibration, path=["response"])
@@ -156,9 +202,7 @@ class TestCalibrations:
     @parametrize
     def test_method_latest_with_all_params(self, client: Miru) -> None:
         calibration = client.calibrations.latest(
-            aspect=["pose"],
             component=["arm"],
-            role=["front-left"],
         )
         assert_matches_type(CalibrationLatestResponse, calibration, path=["response"])
 
@@ -211,9 +255,7 @@ class TestAsyncCalibrations:
                 "data": '{\n  "enable_autonomy": true,\n  "enable_remote_control": true,\n  "max_payload_kg": 10.0\n}\n',
                 "format": "json",
             },
-            aspect="pose",
             reported_by="Benjamin Smidt",
-            role="front-left",
             serial_number="SN-1234",
         )
         assert_matches_type(CalibrationCreateResponse, calibration, path=["response"])
@@ -310,6 +352,53 @@ class TestAsyncCalibrations:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    async def test_method_invalidate(self, async_client: AsyncMiru) -> None:
+        calibration = await async_client.calibrations.invalidate(
+            component="arm",
+            reason="power cycle",
+        )
+        assert_matches_type(Calibration, calibration, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_invalidate_with_all_params(self, async_client: AsyncMiru) -> None:
+        calibration = await async_client.calibrations.invalidate(
+            component="arm",
+            reason="power cycle",
+            report_id="0b6f3c2e-6a51-4e0f-9a43-2f1d7c9e8b10",
+        )
+        assert_matches_type(Calibration, calibration, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_invalidate(self, async_client: AsyncMiru) -> None:
+        response = await async_client.calibrations.with_raw_response.invalidate(
+            component="arm",
+            reason="power cycle",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        calibration = await response.parse()
+        assert_matches_type(Calibration, calibration, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_invalidate(self, async_client: AsyncMiru) -> None:
+        async with async_client.calibrations.with_streaming_response.invalidate(
+            component="arm",
+            reason="power cycle",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            calibration = await response.parse()
+            assert_matches_type(Calibration, calibration, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     async def test_method_latest(self, async_client: AsyncMiru) -> None:
         calibration = await async_client.calibrations.latest()
         assert_matches_type(CalibrationLatestResponse, calibration, path=["response"])
@@ -318,9 +407,7 @@ class TestAsyncCalibrations:
     @parametrize
     async def test_method_latest_with_all_params(self, async_client: AsyncMiru) -> None:
         calibration = await async_client.calibrations.latest(
-            aspect=["pose"],
             component=["arm"],
-            role=["front-left"],
         )
         assert_matches_type(CalibrationLatestResponse, calibration, path=["response"])
 

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import calibration_create_params, calibration_latest_params
+from ..types import calibration_create_params, calibration_latest_params, calibration_invalidate_params
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -24,6 +24,7 @@ from .._response import (
     async_to_custom_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.calibration import Calibration
 from ..types.calibration_create_response import CalibrationCreateResponse
 from ..types.calibration_latest_response import CalibrationLatestResponse
 
@@ -55,9 +56,7 @@ class CalibrationsResource(SyncAPIResource):
         *,
         component: str,
         content: calibration_create_params.Content,
-        aspect: str | Omit = omit,
         reported_by: str | Omit = omit,
-        role: str | Omit = omit,
         serial_number: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -77,18 +76,8 @@ class CalibrationsResource(SyncAPIResource):
           content: The calibration's content, at most 1 MiB. The agent uploads it to Miru
               unchanged.
 
-          aspect: Slug of the aspect of the unit that was calibrated, when it has more than one,
-              e.g. `intrinsics` vs `extrinsics`, or `pose` vs `joint-offsets`. Validated like
-              a slug; `null` is reserved. Miru resolves it to one of the component's
-              `aspects`, creating the aspect the first time it is reported.
-
           reported_by: Who reported the calibration, as the device knows them, such as
               `Benjamin Smidt`. Free text, at most 255 characters. Miru stores it unchanged.
-
-          role: Slug of the role the calibrated unit fills on the device, such as `left` or
-              `front-left`. Distinguishes several units of one component on a device.
-              Validated like a slug; `null` is reserved. Miru resolves it to one of the
-              component's `roles`, creating the role the first time it is reported.
 
           serial_number: Serial number of the physical unit that was calibrated, not of the device, such
               as `SN-1234`. Free text, at most 255 characters.
@@ -107,9 +96,7 @@ class CalibrationsResource(SyncAPIResource):
                 {
                     "component": component,
                     "content": content,
-                    "aspect": aspect,
                     "reported_by": reported_by,
-                    "role": role,
                     "serial_number": serial_number,
                 },
                 calibration_create_params.CalibrationCreateParams,
@@ -131,10 +118,8 @@ class CalibrationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BinaryAPIResponse:
-        """Download the content of a latest calibration by its report ID.
-
-        An older report
-        returns 404.
+        """
+        Download the content of a latest calibration by its report ID.
 
         Args:
           extra_headers: Send extra headers
@@ -156,12 +141,60 @@ class CalibrationsResource(SyncAPIResource):
             cast_to=BinaryAPIResponse,
         )
 
+    def invalidate(
+        self,
+        *,
+        component: str,
+        reason: str,
+        report_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Calibration:
+        """
+        Mark a component's latest calibration invalid.
+
+        Args:
+          component: Slug of the component whose latest calibration to invalidate, such as `arm`.
+
+          reason: Why the calibration is no longer valid, such as `power cycle`. Free text, at
+              most 512 characters, and not blank.
+
+          report_id: Report ID of the calibration the caller expects to be `component`'s latest. If
+              it is not `component`'s current latest calibration, the agent invalidates
+              nothing. Leave it out to invalidate whatever is latest.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/calibrations/latest/invalidate",
+            body=maybe_transform(
+                {
+                    "component": component,
+                    "reason": reason,
+                    "report_id": report_id,
+                },
+                calibration_invalidate_params.CalibrationInvalidateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Calibration,
+        )
+
     def latest(
         self,
         *,
-        aspect: SequenceNotStr[str] | Omit = omit,
         component: SequenceNotStr[str] | Omit = omit,
-        role: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -170,18 +203,10 @@ class CalibrationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CalibrationLatestResponse:
         """
-        List the latest calibration for each component, role and aspect on the device.
+        List the latest calibration for each component on the device.
 
         Args:
-          aspect: The aspect slugs to filter by; `null` matches calibrations reported without an
-              aspect. Aspect slugs are unique only within a component, so filter by component
-              too to match one component's aspect.
-
           component: The component slugs to filter by.
-
-          role: The role slugs to filter by; `null` matches calibrations reported without a
-              role. Role slugs are unique only within a component, so filter by component too
-              to match one component's role.
 
           extra_headers: Send extra headers
 
@@ -198,14 +223,7 @@ class CalibrationsResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "aspect": aspect,
-                        "component": component,
-                        "role": role,
-                    },
-                    calibration_latest_params.CalibrationLatestParams,
-                ),
+                query=maybe_transform({"component": component}, calibration_latest_params.CalibrationLatestParams),
             ),
             cast_to=CalibrationLatestResponse,
         )
@@ -236,9 +254,7 @@ class AsyncCalibrationsResource(AsyncAPIResource):
         *,
         component: str,
         content: calibration_create_params.Content,
-        aspect: str | Omit = omit,
         reported_by: str | Omit = omit,
-        role: str | Omit = omit,
         serial_number: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -258,18 +274,8 @@ class AsyncCalibrationsResource(AsyncAPIResource):
           content: The calibration's content, at most 1 MiB. The agent uploads it to Miru
               unchanged.
 
-          aspect: Slug of the aspect of the unit that was calibrated, when it has more than one,
-              e.g. `intrinsics` vs `extrinsics`, or `pose` vs `joint-offsets`. Validated like
-              a slug; `null` is reserved. Miru resolves it to one of the component's
-              `aspects`, creating the aspect the first time it is reported.
-
           reported_by: Who reported the calibration, as the device knows them, such as
               `Benjamin Smidt`. Free text, at most 255 characters. Miru stores it unchanged.
-
-          role: Slug of the role the calibrated unit fills on the device, such as `left` or
-              `front-left`. Distinguishes several units of one component on a device.
-              Validated like a slug; `null` is reserved. Miru resolves it to one of the
-              component's `roles`, creating the role the first time it is reported.
 
           serial_number: Serial number of the physical unit that was calibrated, not of the device, such
               as `SN-1234`. Free text, at most 255 characters.
@@ -288,9 +294,7 @@ class AsyncCalibrationsResource(AsyncAPIResource):
                 {
                     "component": component,
                     "content": content,
-                    "aspect": aspect,
                     "reported_by": reported_by,
-                    "role": role,
                     "serial_number": serial_number,
                 },
                 calibration_create_params.CalibrationCreateParams,
@@ -312,10 +316,8 @@ class AsyncCalibrationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncBinaryAPIResponse:
-        """Download the content of a latest calibration by its report ID.
-
-        An older report
-        returns 404.
+        """
+        Download the content of a latest calibration by its report ID.
 
         Args:
           extra_headers: Send extra headers
@@ -337,12 +339,60 @@ class AsyncCalibrationsResource(AsyncAPIResource):
             cast_to=AsyncBinaryAPIResponse,
         )
 
+    async def invalidate(
+        self,
+        *,
+        component: str,
+        reason: str,
+        report_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Calibration:
+        """
+        Mark a component's latest calibration invalid.
+
+        Args:
+          component: Slug of the component whose latest calibration to invalidate, such as `arm`.
+
+          reason: Why the calibration is no longer valid, such as `power cycle`. Free text, at
+              most 512 characters, and not blank.
+
+          report_id: Report ID of the calibration the caller expects to be `component`'s latest. If
+              it is not `component`'s current latest calibration, the agent invalidates
+              nothing. Leave it out to invalidate whatever is latest.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/calibrations/latest/invalidate",
+            body=await async_maybe_transform(
+                {
+                    "component": component,
+                    "reason": reason,
+                    "report_id": report_id,
+                },
+                calibration_invalidate_params.CalibrationInvalidateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Calibration,
+        )
+
     async def latest(
         self,
         *,
-        aspect: SequenceNotStr[str] | Omit = omit,
         component: SequenceNotStr[str] | Omit = omit,
-        role: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -351,18 +401,10 @@ class AsyncCalibrationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CalibrationLatestResponse:
         """
-        List the latest calibration for each component, role and aspect on the device.
+        List the latest calibration for each component on the device.
 
         Args:
-          aspect: The aspect slugs to filter by; `null` matches calibrations reported without an
-              aspect. Aspect slugs are unique only within a component, so filter by component
-              too to match one component's aspect.
-
           component: The component slugs to filter by.
-
-          role: The role slugs to filter by; `null` matches calibrations reported without a
-              role. Role slugs are unique only within a component, so filter by component too
-              to match one component's role.
 
           extra_headers: Send extra headers
 
@@ -380,12 +422,7 @@ class AsyncCalibrationsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {
-                        "aspect": aspect,
-                        "component": component,
-                        "role": role,
-                    },
-                    calibration_latest_params.CalibrationLatestParams,
+                    {"component": component}, calibration_latest_params.CalibrationLatestParams
                 ),
             ),
             cast_to=CalibrationLatestResponse,
@@ -403,6 +440,9 @@ class CalibrationsResourceWithRawResponse:
             calibrations.download,
             BinaryAPIResponse,
         )
+        self.invalidate = to_raw_response_wrapper(
+            calibrations.invalidate,
+        )
         self.latest = to_raw_response_wrapper(
             calibrations.latest,
         )
@@ -418,6 +458,9 @@ class AsyncCalibrationsResourceWithRawResponse:
         self.download = async_to_custom_raw_response_wrapper(
             calibrations.download,
             AsyncBinaryAPIResponse,
+        )
+        self.invalidate = async_to_raw_response_wrapper(
+            calibrations.invalidate,
         )
         self.latest = async_to_raw_response_wrapper(
             calibrations.latest,
@@ -435,6 +478,9 @@ class CalibrationsResourceWithStreamingResponse:
             calibrations.download,
             StreamedBinaryAPIResponse,
         )
+        self.invalidate = to_streamed_response_wrapper(
+            calibrations.invalidate,
+        )
         self.latest = to_streamed_response_wrapper(
             calibrations.latest,
         )
@@ -450,6 +496,9 @@ class AsyncCalibrationsResourceWithStreamingResponse:
         self.download = async_to_custom_streamed_response_wrapper(
             calibrations.download,
             AsyncStreamedBinaryAPIResponse,
+        )
+        self.invalidate = async_to_streamed_response_wrapper(
+            calibrations.invalidate,
         )
         self.latest = async_to_streamed_response_wrapper(
             calibrations.latest,

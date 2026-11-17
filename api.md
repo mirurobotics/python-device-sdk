@@ -3,12 +3,13 @@
 Types:
 
 ```python
-from miru_device_sdk.types import AgentHealthResponse, AgentVersionResponse
+from miru_device_sdk.types import AgentHealthResponse, AgentSyncResponse, AgentVersionResponse
 ```
 
 Methods:
 
 - <code title="get /health">client.agent.<a href="./src/miru_device_sdk/resources/agent.py">health</a>() -> <a href="./src/miru_device_sdk/types/agent_health_response.py">AgentHealthResponse</a></code>
+- <code title="post /sync">client.agent.<a href="./src/miru_device_sdk/resources/agent.py">sync</a>() -> <a href="./src/miru_device_sdk/types/agent_sync_response.py">AgentSyncResponse</a></code>
 - <code title="get /version">client.agent.<a href="./src/miru_device_sdk/resources/agent.py">version</a>() -> <a href="./src/miru_device_sdk/types/agent_version_response.py">AgentVersionResponse</a></code>
 
 # Calibrations
@@ -23,6 +24,7 @@ Methods:
 
 - <code title="post /calibrations">client.calibrations.<a href="./src/miru_device_sdk/resources/calibrations.py">create</a>(\*\*<a href="src/miru_device_sdk/types/calibration_create_params.py">params</a>) -> <a href="./src/miru_device_sdk/types/calibration_create_response.py">CalibrationCreateResponse</a></code>
 - <code title="get /calibrations/latest/{report_id}/content">client.calibrations.<a href="./src/miru_device_sdk/resources/calibrations.py">download</a>(report_id) -> BinaryAPIResponse</code>
+- <code title="post /calibrations/latest/invalidate">client.calibrations.<a href="./src/miru_device_sdk/resources/calibrations.py">invalidate</a>(\*\*<a href="src/miru_device_sdk/types/calibration_invalidate_params.py">params</a>) -> <a href="./src/miru_device_sdk/types/calibration.py">Calibration</a></code>
 - <code title="get /calibrations/latest">client.calibrations.<a href="./src/miru_device_sdk/resources/calibrations.py">latest</a>(\*\*<a href="src/miru_device_sdk/types/calibration_latest_params.py">params</a>) -> <a href="./src/miru_device_sdk/types/calibration_latest_response.py">CalibrationLatestResponse</a></code>
 
 # Deployments
@@ -43,13 +45,12 @@ Methods:
 Types:
 
 ```python
-from miru_device_sdk.types import DeviceRetrieveResponse, DeviceSyncResponse
+from miru_device_sdk.types import DeviceRetrieveResponse
 ```
 
 Methods:
 
 - <code title="get /device">client.device.<a href="./src/miru_device_sdk/resources/device.py">retrieve</a>() -> <a href="./src/miru_device_sdk/types/device_retrieve_response.py">DeviceRetrieveResponse</a></code>
-- <code title="post /device/sync">client.device.<a href="./src/miru_device_sdk/resources/device.py">sync</a>() -> <a href="./src/miru_device_sdk/types/device_sync_response.py">DeviceSyncResponse</a></code>
 
 # FileRules
 

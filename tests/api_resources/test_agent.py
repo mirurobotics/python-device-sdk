@@ -9,7 +9,7 @@ import pytest
 
 from tests.utils import assert_matches_type
 from miru_device_sdk import Miru, AsyncMiru
-from miru_device_sdk.types import AgentHealthResponse, AgentVersionResponse
+from miru_device_sdk.types import AgentSyncResponse, AgentHealthResponse, AgentVersionResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -42,6 +42,34 @@ class TestAgent:
 
             agent = response.parse()
             assert_matches_type(AgentHealthResponse, agent, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_sync(self, client: Miru) -> None:
+        agent = client.agent.sync()
+        assert_matches_type(AgentSyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_sync(self, client: Miru) -> None:
+        response = client.agent.with_raw_response.sync()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        agent = response.parse()
+        assert_matches_type(AgentSyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_sync(self, client: Miru) -> None:
+        with client.agent.with_streaming_response.sync() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            agent = response.parse()
+            assert_matches_type(AgentSyncResponse, agent, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -104,6 +132,34 @@ class TestAsyncAgent:
 
             agent = await response.parse()
             assert_matches_type(AgentHealthResponse, agent, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_sync(self, async_client: AsyncMiru) -> None:
+        agent = await async_client.agent.sync()
+        assert_matches_type(AgentSyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_sync(self, async_client: AsyncMiru) -> None:
+        response = await async_client.agent.with_raw_response.sync()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        agent = await response.parse()
+        assert_matches_type(AgentSyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_sync(self, async_client: AsyncMiru) -> None:
+        async with async_client.agent.with_streaming_response.sync() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            agent = await response.parse()
+            assert_matches_type(AgentSyncResponse, agent, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

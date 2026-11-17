@@ -10,4 +10,4 @@ __all__ = ["CalibrationLatestResponse"]
 
 class CalibrationLatestResponse(BaseModel):
     calibrations: List[Calibration]
-    """The latest calibrations, one for each component, role and aspect."""
+    """The latest calibrations, one for each component."""

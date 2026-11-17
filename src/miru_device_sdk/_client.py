@@ -170,7 +170,7 @@ class Miru(SyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("MIRU_BASE_URL")
         if base_url is None:
-            base_url = f"http://localhost/v0.2"
+            base_url = f"http://localhost/v0.3"
         if http_client is None:
             http_client = _build_sync_httpx_client(
                 socket_path=socket_path,
@@ -448,7 +448,7 @@ class AsyncMiru(AsyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("MIRU_BASE_URL")
         if base_url is None:
-            base_url = f"http://localhost/v0.2"
+            base_url = f"http://localhost/v0.3"
         if http_client is None:
             http_client = _build_async_httpx_client(
                 socket_path=socket_path,

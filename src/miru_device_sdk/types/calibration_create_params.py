@@ -21,27 +21,11 @@ class CalibrationCreateParams(TypedDict, total=False):
     The agent uploads it to Miru unchanged.
     """
 
-    aspect: str
-    """
-    Slug of the aspect of the unit that was calibrated, when it has more than one,
-    e.g. `intrinsics` vs `extrinsics`, or `pose` vs `joint-offsets`. Validated like
-    a slug; `null` is reserved. Miru resolves it to one of the component's
-    `aspects`, creating the aspect the first time it is reported.
-    """
-
     reported_by: str
     """Who reported the calibration, as the device knows them, such as
     `Benjamin Smidt`.
 
     Free text, at most 255 characters. Miru stores it unchanged.
-    """
-
-    role: str
-    """
-    Slug of the role the calibrated unit fills on the device, such as `left` or
-    `front-left`. Distinguishes several units of one component on a device.
-    Validated like a slug; `null` is reserved. Miru resolves it to one of the
-    component's `roles`, creating the role the first time it is reported.
     """
 
     serial_number: str

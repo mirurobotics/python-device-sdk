@@ -194,7 +194,7 @@ class TestClientWithDiscovery:
         with agent.client() as client:
             assert client.agent.health().status == "ok"
         request = agent.requests[0]
-        assert str(request.url) == "http://127.0.0.1:43210/v0.2/health"
+        assert str(request.url) == "http://127.0.0.1:43210/v0.3/health"
         assert request.headers["Host"] == "127.0.0.1:43210"
         assert request.headers["Authorization"] == "Bearer tok"
 
@@ -286,11 +286,11 @@ class TestClientWithDiscovery:
             agent_transport="tcp",
             discovery_file=str(tmp_path / "absent.json"),
             bearer_token="explicit",
-            base_url="http://127.0.0.1:43210/v0.2",
+            base_url="http://127.0.0.1:43210/v0.3",
             http_client=httpx.Client(transport=httpx.MockTransport(handler)),
         ) as client:
             client.agent.health()
-        assert str(requests[0].url) == "http://127.0.0.1:43210/v0.2/health"
+        assert str(requests[0].url) == "http://127.0.0.1:43210/v0.3/health"
         assert requests[0].headers["Authorization"] == "Bearer explicit"
 
     def test_unix_socket_sends_no_token(self) -> None:
