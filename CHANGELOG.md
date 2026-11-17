@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.11.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.10.0...v0.11.0) (2026-11-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* **device:** support Device API v0.3.0 ([#32](https://github.com/mirurobotics/python-device-sdk/issues/32))
+
+### Features
+
+* **device:** support Device API v0.3.0 ([#32](https://github.com/mirurobotics/python-device-sdk/issues/32)) ([b572cf9](https://github.com/mirurobotics/python-device-sdk/commit/b572cf99ad286211e8e26a9c3b90d4f2ed431212))
+
+
+### Chores
+
+* regenerate SDK from openapi config ([fd579d1](https://github.com/mirurobotics/python-device-sdk/commit/fd579d1c14e72044e13a33b6b54f7366fc0a23ed))
+
+
+### Documentation
+
+* **cli,frontend:** document the principal subjects expansion ([#451](https://github.com/mirurobotics/python-device-sdk/issues/451)) ([c15c646](https://github.com/mirurobotics/python-device-sdk/commit/c15c646ca61688e33373a292ea007dde04117959))
+* **uploads:** describe the upload path fallback on a held path ([#463](https://github.com/mirurobotics/python-device-sdk/issues/463)) ([fa7cc38](https://github.com/mirurobotics/python-device-sdk/commit/fa7cc38f809eaf5459972af3d894ec2549a733ec))
+
 ## [0.10.0](https://github.com/mirurobotics/python-device-sdk/compare/v0.9.0...v0.10.0) (2026-11-10)
 
 
